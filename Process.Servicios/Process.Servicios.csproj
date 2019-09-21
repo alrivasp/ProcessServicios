@@ -73,12 +73,57 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Process_Acceso.asmx" />
+    <Content Include="Process_Cargo.asmx" />
+    <Content Include="Process_Comuna.asmx" />
+    <Content Include="Process_Cuenta.asmx" />
+    <Content Include="Process_Empresa.asmx" />
+    <Content Include="Process_Provincia.asmx" />
+    <Content Include="Process_Region.asmx" />
+    <Content Include="Process_Rol.asmx" />
     <Content Include="Process_Unidad.asmx" />
+    <Content Include="Process_Usuario.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Process_Acceso.asmx.cs">
+      <DependentUpon>Process_Acceso.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Cargo.asmx.cs">
+      <DependentUpon>Process_Cargo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Comuna.asmx.cs">
+      <DependentUpon>Process_Comuna.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Cuenta.asmx.cs">
+      <DependentUpon>Process_Cuenta.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Empresa.asmx.cs">
+      <DependentUpon>Process_Empresa.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Provincia.asmx.cs">
+      <DependentUpon>Process_Provincia.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Region.asmx.cs">
+      <DependentUpon>Process_Region.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Rol.asmx.cs">
+      <DependentUpon>Process_Rol.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Process_Unidad.asmx.cs">
       <DependentUpon>Process_Unidad.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Usuario.asmx.cs">
+      <DependentUpon>Process_Usuario.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

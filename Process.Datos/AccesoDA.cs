@@ -9,10 +9,10 @@ using Process.Modelos;
 
 namespace Process.Datos
 {
-    public class RegionDA
+    public class AccesoDA
     {
 
-        public DataSet TraerRegionSinEntidad(int _id_region)
+        public DataSet TraerAccesoSinEntidad(int _id_acceso)
         {
             OracleCommand cmd = null;
             OracleDataReader dr = null;
@@ -20,14 +20,14 @@ namespace Process.Datos
             DataTable dt = new DataTable();
             try
             {
-                string procedure = "REGION_TRAER_REGION";
+                string procedure = "ACCESO_TRAER_ACCESO";
                 OracleConnection cnx = Global.CadenaConexionGlobal;
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("V_ID_REGION ", OracleDbType.Int32).Value = _id_region;
+                cmd.Parameters.Add("V_ID_ACCESO", OracleDbType.Int32).Value = _id_acceso;
 
-                OracleParameter retorno = cmd.Parameters.Add("C_REGION ", OracleDbType.RefCursor);
+                OracleParameter retorno = cmd.Parameters.Add("C_ACCESO", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;
 
                 cmd.Connection.Open();
@@ -52,23 +52,23 @@ namespace Process.Datos
             return datos;
         }
 
-        public Region TraerRegionConEntidad(int _id_region)
+        public Acceso TraerAccesoConEntidad(int _id_acceso)
         {
             OracleCommand cmd = null;
             OracleDataReader dr = null;
             DataSet datos = new DataSet();
             DataTable dt = new DataTable();
-            Region region = new Region();
+            Acceso acceso = new Acceso();
             try
             {
-                string procedure = "REGION_TRAER_REGION";
+                string procedure = "ACCESO_TRAER_ACCESO";
                 OracleConnection cnx = Global.CadenaConexionGlobal;
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("V_ID_REGION", OracleDbType.Int32).Value = _id_region;
+                cmd.Parameters.Add("V_ID_ACCESO", OracleDbType.Int32).Value = _id_acceso;
 
-                OracleParameter retorno = cmd.Parameters.Add("C_REGION", OracleDbType.RefCursor);
+                OracleParameter retorno = cmd.Parameters.Add("C_ACCESO", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;
 
                 cmd.Connection.Open();
@@ -78,7 +78,7 @@ namespace Process.Datos
                 {
                     dt.Load(dr);
                     datos.Tables.Add(dt);
-                    region.FillFromDataSet(datos);
+                    acceso.FillFromDataSet(datos);
                 }
 
             }
@@ -91,10 +91,10 @@ namespace Process.Datos
                 cmd.Connection.Close();
             }
 
-            return region;
+            return acceso;
         }
 
-        public DataSet TraerTodasRegiones()
+        public DataSet TraerTodosAccesos()
         {
             OracleCommand cmd = null;
             OracleDataReader dr = null;
@@ -102,13 +102,13 @@ namespace Process.Datos
             DataTable dt = new DataTable();
             try
             {
-                string procedure = "REGION_TRAER_TODAS_REGIONES";
+                string procedure = "ACCESO_TRAER_TODOS_ACCESO";
                 OracleConnection cnx = Global.CadenaConexionGlobal;
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
-                
 
-                OracleParameter retorno = cmd.Parameters.Add("C_REGIONES", OracleDbType.RefCursor);
+
+                OracleParameter retorno = cmd.Parameters.Add("C_ACCESOS", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;
 
                 cmd.Connection.Open();

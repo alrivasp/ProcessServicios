@@ -11,31 +11,31 @@ using System.Data;
 namespace Process.Servicios
 {
     /// <summary>
-    /// Descripción breve de Process_Unidad
+    /// Descripción breve de Process_Cargo
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // Para permitir que se llame a este servicio web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente. 
     // [System.Web.Script.Services.ScriptService]
-    public class Process_Unidad : System.Web.Services.WebService
+    public class Process_Cargo : System.Web.Services.WebService
     {
-        private UnidadNE unidadNE = new UnidadNE();
-        private Unidad unidad = new Unidad();
+        private CargoNE cargoNE = new CargoNE();
+        private Cargo cargo = new Cargo();
 
         //////////////////////////////////////
         ////Web Metodos para APP de Escritorio
         //////////////////////////////////////
         [WebMethod]
-        public int InsertarUnidadConEntidad_Escritorio(DataSet _unidad)
+        public int InsertarCargoConEntidad_Escritorio(DataSet _unidad)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                unidad = new Unidad();
-                unidad.FillFromDataSet(_unidad);
-                retorno = unidadNE.InsertarUnidadConEntidad(unidad);
+                cargo = new Cargo();
+                cargo.FillFromDataSet(_unidad);
+                retorno = cargoNE.InsertarCargoConEntidad(cargo);
                 return retorno;
 
             }
@@ -48,13 +48,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int InsertarUnidadSinEntidad_Escritorio(string _nombre, string _descripcion, int _estado, string _rut_empresa)
+        public int InsertarCargoSinEntidad_Escritorio(string _nombre, string _descripcion, string _rut_empresa)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                retorno = unidadNE.InsertarUnidadSinEntidad(_nombre, _descripcion, _estado, _rut_empresa);
+                retorno = cargoNE.InsertarCargoSinEntidad(_nombre, _descripcion, _rut_empresa);
                 return retorno;
 
             }
@@ -67,15 +67,15 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int ActualizarUnidadConEntidad_Escritorio(DataSet _unidad)
+        public int ActualizarCargoConEntidad_Escritorio(DataSet _unidad)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                unidad = new Unidad();
-                unidad.FillFromDataSet(_unidad);
-                retorno = unidadNE.ActualizarUnidadConEntidad(unidad);
+                cargo = new Cargo();
+                cargo.FillFromDataSet(_unidad);
+                retorno = cargoNE.ActualizarCargoConEntidad(cargo);
                 return retorno;
 
             }
@@ -88,13 +88,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int ActualizarUnidadSinEntidad_Escritorio(int _id_unidad, string _nombre, string _descripcion, int _estado, string _rut_empresa)
+        public int ActualizarCargoSinEntidad_Escritorio(string _nombre, string _descripcion, string _rut_empresa)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                retorno = unidadNE.ActualizarUnidadSinEntidad(_id_unidad, _nombre, _descripcion, _estado, _rut_empresa);
+                retorno = cargoNE.ActualizarCargoSinEntidad(_nombre, _descripcion, _rut_empresa);
                 return retorno;
 
             }
@@ -107,13 +107,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public DataSet TraerUnidadSinEntidad_Escritorio(int _id_unidad, string _rut_empresa)
+        public DataSet TraerCargoSinEntidad_Escritorio(int _id_cargo)
         {
             try
             {
                 CadenaConexion();
                 DataSet retorno = new DataSet();
-                retorno = unidadNE.TraerUnidadSinEntidad(_id_unidad, _rut_empresa);
+                retorno = cargoNE.TraerCargoSinEntidad(_id_cargo);
                 return retorno;
 
             }
@@ -126,13 +126,33 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public Unidad TraerUnidadConEntidad_Escritorio(int _id_unidad, string _rut_empresa)
+        public Cargo TraerCargoConEntidad_Escritorio(int _id_cargo)
         {
             try
             {
                 CadenaConexion();
-                Unidad retorno = new Unidad();
-                retorno = unidadNE.TraerUnidadConEntidad(_id_unidad, _rut_empresa);
+                Cargo retorno = new Cargo();
+                retorno = cargoNE.TraerCargoConEntidad(_id_cargo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+
+        [WebMethod]
+        public DataSet TraerCargoConEmpresaSinEntidad_Escritorio(string _rut_empresa)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = cargoNE.TraerCargoConEmpresaSinEntidad(_rut_empresa);
                 return retorno;
 
             }
@@ -145,13 +165,32 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public DataSet TraerTodasUnidades_Escritorio(string _rut_empresa)
+        public Cargo TraerCargoConEmpresaConEntidad_Escritorio(string _rut_empresa)
+        {
+            try
+            {
+                CadenaConexion();
+                Cargo retorno = new Cargo();
+                retorno = cargoNE.TraerCargoConEmpresaConEntidad(_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public DataSet TraerTodasCargos_Escritorio()
         {
             try
             {
                 CadenaConexion();
                 DataSet retorno = new DataSet();
-                retorno = unidadNE.TraerTodasUnidades(_rut_empresa);
+                retorno = cargoNE.TraerTodasCargos();
                 return retorno;
 
             }
@@ -166,7 +205,7 @@ namespace Process.Servicios
         //////////////////////////////////////
         ////Web Metodos para APP WEB
         //////////////////////////////////////
-        
+
 
 
         /// <summary>

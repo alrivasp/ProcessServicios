@@ -9,10 +9,9 @@ using Process.Modelos;
 
 namespace Process.Datos
 {
-    public class RegionDA
+    public class ComunaDA
     {
-
-        public DataSet TraerRegionSinEntidad(int _id_region)
+        public DataSet TraerComunaSinEntidad(int _id_comuna)
         {
             OracleCommand cmd = null;
             OracleDataReader dr = null;
@@ -20,14 +19,14 @@ namespace Process.Datos
             DataTable dt = new DataTable();
             try
             {
-                string procedure = "REGION_TRAER_REGION";
+                string procedure = "COMUNA_TRAER_COMUNA";
                 OracleConnection cnx = Global.CadenaConexionGlobal;
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("V_ID_REGION ", OracleDbType.Int32).Value = _id_region;
+                cmd.Parameters.Add("V_ID_COMUNA", OracleDbType.Int32).Value = _id_comuna;
 
-                OracleParameter retorno = cmd.Parameters.Add("C_REGION ", OracleDbType.RefCursor);
+                OracleParameter retorno = cmd.Parameters.Add("C_COMUNA", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;
 
                 cmd.Connection.Open();
@@ -52,23 +51,23 @@ namespace Process.Datos
             return datos;
         }
 
-        public Region TraerRegionConEntidad(int _id_region)
+        public Comuna TraerComunaConEntidad(int _id_comuna)
         {
             OracleCommand cmd = null;
             OracleDataReader dr = null;
             DataSet datos = new DataSet();
             DataTable dt = new DataTable();
-            Region region = new Region();
+            Comuna comuna = new Comuna();
             try
             {
-                string procedure = "REGION_TRAER_REGION";
+                string procedure = "COMUNA_TRAER_COMUNA";
                 OracleConnection cnx = Global.CadenaConexionGlobal;
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("V_ID_REGION", OracleDbType.Int32).Value = _id_region;
+                cmd.Parameters.Add("V_ID_COMUNA", OracleDbType.Int32).Value = _id_comuna;
 
-                OracleParameter retorno = cmd.Parameters.Add("C_REGION", OracleDbType.RefCursor);
+                OracleParameter retorno = cmd.Parameters.Add("C_COMUNA", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;
 
                 cmd.Connection.Open();
@@ -78,7 +77,7 @@ namespace Process.Datos
                 {
                     dt.Load(dr);
                     datos.Tables.Add(dt);
-                    region.FillFromDataSet(datos);
+                    comuna.FillFromDataSet(datos);
                 }
 
             }
@@ -91,10 +90,10 @@ namespace Process.Datos
                 cmd.Connection.Close();
             }
 
-            return region;
+            return comuna;
         }
 
-        public DataSet TraerTodasRegiones()
+        public DataSet TraerTodasComunasPorProvincia(int _id_provincia)
         {
             OracleCommand cmd = null;
             OracleDataReader dr = null;
@@ -102,13 +101,53 @@ namespace Process.Datos
             DataTable dt = new DataTable();
             try
             {
-                string procedure = "REGION_TRAER_TODAS_REGIONES";
+                string procedure = "COMUNA_TRAER_COMUNA_PROVI";
                 OracleConnection cnx = Global.CadenaConexionGlobal;
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
-                
 
-                OracleParameter retorno = cmd.Parameters.Add("C_REGIONES", OracleDbType.RefCursor);
+                cmd.Parameters.Add("V_ID_PROVINCIA", OracleDbType.Int32).Value = _id_provincia;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_COMUNAS", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
+
+        public DataSet TraerTodasComunas()
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "COMUNA_TRAER_TODAS_COMUNA";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                OracleParameter retorno = cmd.Parameters.Add("C_COMUNAS ", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;
 
                 cmd.Connection.Open();

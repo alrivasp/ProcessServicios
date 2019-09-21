@@ -47,8 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoNE.cs" />
+    <Compile Include="CargoNE.cs" />
+    <Compile Include="ComunaNE.cs" />
+    <Compile Include="CuentaNE.cs" />
+    <Compile Include="EmpresaNE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvinciaNE.cs" />
+    <Compile Include="RegionNE.cs" />
+    <Compile Include="RolNE.cs" />
     <Compile Include="UnidadNE.cs" />
+    <Compile Include="UsuarioNE.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
