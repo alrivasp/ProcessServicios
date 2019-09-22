@@ -83,6 +83,7 @@
     <Content Include="Process_Rol.asmx" />
     <Content Include="Process_Unidad.asmx" />
     <Content Include="Process_Usuario.asmx" />
+    <Content Include="Process_Validadores.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +125,10 @@
     </Compile>
     <Compile Include="Process_Usuario.asmx.cs">
       <DependentUpon>Process_Usuario.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Validadores.asmx.cs">
+      <DependentUpon>Process_Validadores.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

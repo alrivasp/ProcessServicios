@@ -126,6 +126,25 @@ namespace Process.Servicios
         }
 
         [WebMethod]
+        public DataSet TraerEmpresaConClaveSinEntidad_Escritorio(string _palabra_clave)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = empresaNE.TraerEmpresaConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
         public Empresa TraerEmpresaConEntidad_Escritorio(string _rut_empresa)
         {
             try

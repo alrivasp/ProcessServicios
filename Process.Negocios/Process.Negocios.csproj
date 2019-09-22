@@ -58,6 +58,7 @@
     <Compile Include="RolNE.cs" />
     <Compile Include="UnidadNE.cs" />
     <Compile Include="UsuarioNE.cs" />
+    <Compile Include="ValidadoresNE.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

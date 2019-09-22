@@ -115,6 +115,23 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerEmpresaConClaveSinEntidad(string _palabra_clave)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = empresaDA.TraerEmpresaConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         public DataSet TraerTodasEmpresas()
         {
             try
