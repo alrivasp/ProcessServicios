@@ -260,7 +260,50 @@ namespace Process.Datos
             return unidad;
         }
 
-        public DataSet TraerTodasUnidades(string _rut_empresa)
+        public Unidad TraerUnidadPorNombrePorEmpresaConEntidad(string _nombre, string _rut_empresa)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            Unidad unidad = new Unidad();
+            try
+            {
+                string procedure = "UNIDAD_TRAER_UNIDAD_NOM_EMP";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _nombre;
+                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_UNIDAD", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                    unidad.FillFromDataSet(datos);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return unidad;
+        }
+
+        public DataSet TraerUnidadConClaveSinEntidad(string _palabra_clave)
         {
             OracleCommand cmd = null;
             OracleDataReader dr = null;
@@ -268,12 +311,50 @@ namespace Process.Datos
             DataTable dt = new DataTable();
             try
             {
-                string procedure = "UNIDAD_TRAER_TODAS_UNIDADES";
+                string procedure = "UNIDAD_TRAER_UNIDAD_CLAVE";
                 OracleConnection cnx = Global.CadenaConexionGlobal;
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
+                cmd.Parameters.Add("V_CLAVE", OracleDbType.NVarchar2).Value = _palabra_clave;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_UNIDAD", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
+
+        public DataSet TraerTodasUnidades()
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "UNIDAD_TRAER_TODAS_UNIDAD";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter retorno = cmd.Parameters.Add("C_UNIDADES", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;

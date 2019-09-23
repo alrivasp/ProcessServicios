@@ -145,13 +145,51 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public DataSet TraerTodasUnidades_Escritorio(string _rut_empresa)
+        public Unidad TraerUnidadPorNombrePorEmpresaConEntidad_Escritorio(string _nombre, string _rut_empresa)
+        {
+            try
+            {
+                CadenaConexion();
+                Unidad retorno = new Unidad();
+                retorno = unidadNE.TraerUnidadPorNombrePorEmpresaConEntidad(_nombre, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public DataSet TraerUnidadConClaveSinEntidad_Escritorio(string _palabra_clave)
         {
             try
             {
                 CadenaConexion();
                 DataSet retorno = new DataSet();
-                retorno = unidadNE.TraerTodasUnidades(_rut_empresa);
+                retorno = unidadNE.TraerUnidadConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public DataSet TraerTodasUnidades_Escritorio()
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = unidadNE.TraerTodasUnidades();
                 return retorno;
 
             }

@@ -115,12 +115,46 @@ namespace Process.Negocios
 
         }
 
-        public DataSet TraerTodasUnidades(string _rut_empresa)
+        public Unidad TraerUnidadPorNombrePorEmpresaConEntidad(string _nombre, string _rut_empresa)
+        {
+            try
+            {
+                Unidad retorno = new Unidad();
+                retorno = unidadDA.TraerUnidadPorNombrePorEmpresaConEntidad(_nombre, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerUnidadConClaveSinEntidad(string _palabra_clave)
         {
             try
             {
                 DataSet retorno = new DataSet();
-                retorno = unidadDA.TraerTodasUnidades(_rut_empresa);
+                retorno = unidadDA.TraerUnidadConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerTodasUnidades()
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = unidadDA.TraerTodasUnidades();
                 return retorno;
 
             }
