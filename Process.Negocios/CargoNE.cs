@@ -64,12 +64,12 @@ namespace Process.Negocios
 
         }
 
-        public int ActualizarCargoSinEntidad(string _nombre, string _descripcion, string _rut_empresa)
+        public int ActualizarCargoSinEntidad(int _id_cargo, string _nombre, string _descripcion, string _rut_empresa)
         {
             try
             {
                 int retorno = 0;
-                retorno = cargoDA.ActualizarCargoSinEntidad(_nombre, _descripcion, _rut_empresa);
+                retorno = cargoDA.ActualizarCargoSinEntidad(_id_cargo, _nombre, _descripcion, _rut_empresa);
                 return retorno;
 
             }
@@ -138,6 +138,40 @@ namespace Process.Negocios
             {
                 Cargo retorno = new Cargo();
                 retorno = cargoDA.TraerCargoConEmpresaConEntidad(_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public Cargo TraerCargoPorNombrePorEmpresaConEntidad(string _nombre, string _rut_empresa)
+        {
+            try
+            {
+                Cargo retorno = new Cargo();
+                retorno = cargoDA.TraerCargoPorNombrePorEmpresaConEntidad(_nombre, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerCargoConClaveSinEntidad(string _palabra_clave)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = cargoDA.TraerCargoConClaveSinEntidad(_palabra_clave);
                 return retorno;
 
             }

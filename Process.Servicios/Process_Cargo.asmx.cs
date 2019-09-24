@@ -88,13 +88,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int ActualizarCargoSinEntidad_Escritorio(string _nombre, string _descripcion, string _rut_empresa)
+        public int ActualizarCargoSinEntidad_Escritorio(int _id_cargo, string _nombre, string _descripcion, string _rut_empresa)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                retorno = cargoNE.ActualizarCargoSinEntidad(_nombre, _descripcion, _rut_empresa);
+                retorno = cargoNE.ActualizarCargoSinEntidad(_id_cargo, _nombre, _descripcion, _rut_empresa);
                 return retorno;
 
             }
@@ -143,8 +143,7 @@ namespace Process.Servicios
             }
 
         }
-
-
+        
         [WebMethod]
         public DataSet TraerCargoConEmpresaSinEntidad_Escritorio(string _rut_empresa)
         {
@@ -172,6 +171,44 @@ namespace Process.Servicios
                 CadenaConexion();
                 Cargo retorno = new Cargo();
                 retorno = cargoNE.TraerCargoConEmpresaConEntidad(_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public Cargo TraerCargoPorNombrePorEmpresaConEntidad_Escritorio(string _nombre, string _rut_empresa)
+        {
+            try
+            {
+                CadenaConexion();
+                Cargo retorno = new Cargo();
+                retorno = cargoNE.TraerCargoPorNombrePorEmpresaConEntidad(_nombre, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public DataSet TraerCargoConClaveSinEntidad_Escritorio(string _palabra_clave)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = cargoNE.TraerCargoConClaveSinEntidad(_palabra_clave);
                 return retorno;
 
             }

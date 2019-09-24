@@ -132,7 +132,7 @@ namespace Process.Datos
             return respuesta;
         }
 
-        public int ActualizarCargoSinEntidad(string _nombre, string _descripcion, string _rut_empresa)
+        public int ActualizarCargoSinEntidad(int _id_cargo, string _nombre, string _descripcion, string _rut_empresa)
         {
             OracleCommand cmd = null;
             int respuesta = 0;
@@ -143,6 +143,7 @@ namespace Process.Datos
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                cmd.Parameters.Add("V_ID_CARGO", OracleDbType.Int32).Value = _id_cargo;
                 cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _nombre;
                 cmd.Parameters.Add("V_DESCRIPCION", OracleDbType.NVarchar2).Value = _descripcion;
                 cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
@@ -332,6 +333,89 @@ namespace Process.Datos
             }
 
             return cargo;
+        }
+
+        public Cargo TraerCargoPorNombrePorEmpresaConEntidad(string _nombre, string _rut_empresa)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            Cargo cargo = new Cargo();
+            try
+            {
+                string procedure = "CARGO_TRAER_CARGO_NOM_EMP";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _nombre;
+                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_CARGO", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                    cargo.FillFromDataSet(datos);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return cargo;
+        }
+
+        public DataSet TraerCargoConClaveSinEntidad(string _palabra_clave)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "CARGO_TRAER_CARGO_CLAVE";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_CLAVE", OracleDbType.NVarchar2).Value = _palabra_clave;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_CARGO", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
         }
 
         public DataSet TraerTodosCargos()
