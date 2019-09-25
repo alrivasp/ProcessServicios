@@ -18,6 +18,7 @@ namespace Process.Datos
             OracleDataReader dr = null;
             DataSet datos = new DataSet();
             DataTable dt = new DataTable();
+            string caca = "gio"; 
             try
             {
                 string procedure = "ACCESO_TRAER_ACCESO";
