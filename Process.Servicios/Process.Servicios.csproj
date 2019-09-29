@@ -79,6 +79,7 @@
     <Content Include="Process_Comuna.asmx" />
     <Content Include="Process_Cuenta.asmx" />
     <Content Include="Process_Empresa.asmx" />
+    <Content Include="Process_Permisos.asmx" />
     <Content Include="Process_Provincia.asmx" />
     <Content Include="Process_Region.asmx" />
     <Content Include="Process_Rol.asmx" />
@@ -110,6 +111,10 @@
     </Compile>
     <Compile Include="Process_Empresa.asmx.cs">
       <DependentUpon>Process_Empresa.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Permisos.asmx.cs">
+      <DependentUpon>Process_Permisos.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Process_Provincia.asmx.cs">

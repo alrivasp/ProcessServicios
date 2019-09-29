@@ -99,6 +99,23 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerRolPorNombreSinEntidad(string _nombre)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = rolDA.TraerRolPorNombreSinEntidad(_nombre);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         public Rol TraerRolConEntidad(int _id_rol)
         {
             try
@@ -116,12 +133,46 @@ namespace Process.Negocios
 
         }
 
+        public Rol TraerRolPorNombreConEntidad(string _nombre)
+        {
+            try
+            {
+                Rol retorno = new Rol();
+                retorno = rolDA.TraerRolPorNombreConEntidad(_nombre);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         public DataSet TraerTodasRoles()
         {
             try
             {
                 DataSet retorno = new DataSet();
                 retorno = rolDA.TraerTodosRoles();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerRolConClaveSinEntidad(string _palabra_clave)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = rolDA.TraerRolConClaveSinEntidad(_palabra_clave);
                 return retorno;
 
             }
