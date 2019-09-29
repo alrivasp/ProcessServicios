@@ -23,35 +23,6 @@ namespace Process.Negocios
         }//fin Validar de numero
 
 
-        //public bool validarRut(string rut)
-        //{
-
-        //    bool validacion = false;
-        //    try
-        //    {
-        //        rut = rut.ToUpper();
-        //        rut = rut.Replace(".", "");
-        //        rut = rut.Replace("-", "");
-        //        int rutAux = int.Parse(rut.Substring(0, rut.Length - 1));
-
-        //        char dv = char.Parse(rut.Substring(rut.Length - 1, 1));
-
-        //        int m = 0, s = 1;
-        //        for (; rutAux != 0; rutAux /= 10)
-        //        {
-        //            s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
-        //        }
-        //        if (dv == (char)(s != 0 ? s + 47 : 75))
-        //        {
-        //            validacion = true;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    return validacion;
-        //}//fin Validar rut
-
         public bool validarRut(string rut)
         {
             rut = rut.Replace(".", "").ToUpper();
@@ -69,11 +40,6 @@ namespace Process.Negocios
             }
             return true;
         }
-
-        //public static bool ValidaRut(string rut, string dv)
-        //{
-        //    return validarRut(rut + "-" + dv);
-        //}
 
         public static string Digito(int rut)
         {
@@ -99,6 +65,27 @@ namespace Process.Negocios
             else
             {
                 return suma.ToString();
+            }
+        }
+
+        public bool validaCorreo(string email)
+        {
+            string expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(email, expresion))
+            {
+                if (Regex.Replace(email, expresion, string.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
     }

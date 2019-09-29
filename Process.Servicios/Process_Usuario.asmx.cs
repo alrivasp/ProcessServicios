@@ -170,6 +170,63 @@ namespace Process.Servicios
 
         }
 
+        [WebMethod]
+        public DataSet TraerUsuarioPorRutPorEmpresaSinEntidad_Escritorio(string _rut_usuario, string _rut_empresa)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = usuarioNE.TraerUsuarioPorRutPorEmpresaSinEntidad(_rut_usuario, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public DataSet TraerTodasUsuariosJoin_Escritorio()
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = usuarioNE.TraerTodasUsuariosJoin();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public DataSet TraerUsuarioConClaveSinEntidad_Escritorio(string _palabra_clave)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = usuarioNE.TraerUsuarioConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         //////////////////////////////////////
         ////Web Metodos para APP WEB
         //////////////////////////////////////

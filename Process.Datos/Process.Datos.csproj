@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AccesoDA.cs" />
     <Compile Include="CargoDA.cs" />
+    <Compile Include="CargosUsuariosDA.cs" />
     <Compile Include="ComunaDA.cs" />
     <Compile Include="CuentaDA.cs" />
     <Compile Include="EmpresaDA.cs" />

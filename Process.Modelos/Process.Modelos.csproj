@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Acceso.cs" />
     <Compile Include="Cargo.cs" />
+    <Compile Include="CargosUsuarios.cs" />
     <Compile Include="Comuna.cs" />
     <Compile Include="Cuenta.cs" />
     <Compile Include="Empresa.cs" />

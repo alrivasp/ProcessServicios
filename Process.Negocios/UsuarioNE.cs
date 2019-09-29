@@ -121,12 +121,63 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerUsuarioConClaveSinEntidad(string _palabra_clave)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = usuarioDA.TraerUsuarioConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerUsuarioPorRutPorEmpresaSinEntidad(string _rut_usuario, string _rut_usuario_rut_empresa)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = usuarioDA.TraerUsuarioPorRutPorEmpresaSinEntidad(_rut_usuario, _rut_usuario_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         public DataSet TraerTodasrUsuarios()
         {
             try
             {
                 DataSet retorno = new DataSet();
                 retorno = usuarioDA.TraerTodasUsuarios();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerTodasUsuariosJoin()
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = usuarioDA.TraerTodasUsuariosJoin();
                 return retorno;
 
             }
