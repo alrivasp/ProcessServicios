@@ -165,5 +165,22 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerCuentaConClaveSinEntidad(string _palabra_clave)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = cuentaDA.TraerCuentaConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

@@ -381,5 +381,45 @@ namespace Process.Datos
 
             return datos;
         }
+
+        public DataSet TraerCuentaConClaveSinEntidad(string _palabra_clave)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "CUENTA_TRAER_CUENTA_CLAVE";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_CLAVE", OracleDbType.NVarchar2).Value = _palabra_clave;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_CUENTA", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
     }
 }

@@ -202,6 +202,25 @@ namespace Process.Servicios
 
         }
 
+        [WebMethod]
+        public DataSet TraerCuentaConClaveSinEntidad_Escritorio(string _palabra_clave)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = cuentaNE.TraerCuentaConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         //////////////////////////////////////
         ////Web Metodos para APP WEB
         //////////////////////////////////////
