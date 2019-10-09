@@ -50,7 +50,7 @@ namespace Process.Servicios
 
         [WebMethod]
         public int InsertarUsuarioSinEntidad_Escritorio(string _rut_usuario, string _primer_nombre, string _segundo_nombre, string _primer_apellido
-                                            , string _segundo_apellido, string _direccion, string _correo, int _telefono_fijp
+                                            , string _segundo_apellido, string _direccion, int _telefono_fijp
                                             , int _telefono_movil, int _estado, int _id_comuna)
         {
             try
@@ -58,7 +58,7 @@ namespace Process.Servicios
                 CadenaConexion();
                 int retorno = 0;
                 retorno = usuarioNE.InsertarrUsuarioSinEntidad(_rut_usuario, _primer_nombre, _segundo_nombre, _primer_apellido, _segundo_apellido
-                                                              , _direccion, _correo, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
+                                                              , _direccion, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
                 return retorno;
 
             }
@@ -93,7 +93,7 @@ namespace Process.Servicios
 
         [WebMethod]
         public int ActualizarUsuarioSinEntidad_Escritorio(string _rut_usuario, string _primer_nombre, string _segundo_nombre, string _primer_apellido
-                                            , string _segundo_apellido, string _direccion, string _correo, int _telefono_fijp
+                                            , string _segundo_apellido, string _direccion, int _telefono_fijp
                                             , int _telefono_movil, int _estado, int _id_comuna)
         {
             try
@@ -101,7 +101,7 @@ namespace Process.Servicios
                 CadenaConexion();
                 int retorno = 0;
                 retorno = usuarioNE.ActualizarrUsuarioSinEntidad(_rut_usuario, _primer_nombre, _segundo_nombre, _primer_apellido, _segundo_apellido
-                                                              , _direccion, _correo, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
+                                                              , _direccion, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
                 return retorno;
 
             }

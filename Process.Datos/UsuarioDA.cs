@@ -29,8 +29,7 @@ namespace Process.Datos
                     cmd.Parameters.Add("V_SEGUNDO_NOMBRE", OracleDbType.NVarchar2).Value = _entidad.Segundo_nombre;
                     cmd.Parameters.Add("V_PRIMER_APELLIDO", OracleDbType.NVarchar2).Value = _entidad.Primer_apellido;
                     cmd.Parameters.Add("V_SEGUNDO_APELLIDO", OracleDbType.NVarchar2).Value = _entidad.Segundo_apellido;
-                    cmd.Parameters.Add("V_DIRECCION", OracleDbType.NVarchar2).Value = _entidad.Direccion;
-                    cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _entidad.Correo;
+                    cmd.Parameters.Add("V_DIRECCION", OracleDbType.NVarchar2).Value = _entidad.Direccion;                    
                     cmd.Parameters.Add("V_TELEFONO_FIJO", OracleDbType.Int32).Value = _entidad.Telefono_fijo;
                     cmd.Parameters.Add("V_TELEFONO_MOVIL", OracleDbType.Int32).Value = _entidad.Telefono_movil;
                     cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _entidad.Estado;
@@ -62,7 +61,7 @@ namespace Process.Datos
         }
 
         public int InsertarUsuarioSinEntidad(string _rut_usuario, string _primer_nombre, string _segundo_nombre, string _primer_apellido
-                                            ,string _segundo_apellido, string _direccion, string _correo, int _telefono_fijp
+                                            ,string _segundo_apellido, string _direccion, int _telefono_fijp
                                             , int _telefono_movil,int _estado, int _id_comuna)
         {
             OracleCommand cmd = null;
@@ -79,8 +78,7 @@ namespace Process.Datos
                 cmd.Parameters.Add("V_SEGUNDO_NOMBRE", OracleDbType.NVarchar2).Value = _segundo_nombre;
                 cmd.Parameters.Add("V_PRIMER_APELLIDO", OracleDbType.NVarchar2).Value = _primer_apellido;
                 cmd.Parameters.Add("V_SEGUNDO_APELLIDO", OracleDbType.NVarchar2).Value = _segundo_apellido;
-                cmd.Parameters.Add("V_DIRECCION", OracleDbType.NVarchar2).Value = _direccion;
-                cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _correo;
+                cmd.Parameters.Add("V_DIRECCION", OracleDbType.NVarchar2).Value = _direccion;                
                 cmd.Parameters.Add("V_TELEFONO_FIJO", OracleDbType.Int32).Value = _telefono_fijp;
                 cmd.Parameters.Add("V_TELEFONO_MOVIL", OracleDbType.Int32).Value = _telefono_movil;
                 cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _estado;
@@ -128,7 +126,6 @@ namespace Process.Datos
                     cmd.Parameters.Add("V_PRIMER_APELLIDO", OracleDbType.NVarchar2).Value = _entidad.Primer_apellido;
                     cmd.Parameters.Add("V_SEGUNDO_APELLIDO", OracleDbType.NVarchar2).Value = _entidad.Segundo_apellido;
                     cmd.Parameters.Add("V_DIRECCION", OracleDbType.NVarchar2).Value = _entidad.Direccion;
-                    cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _entidad.Correo;
                     cmd.Parameters.Add("V_TELEFONO_FIJO", OracleDbType.Int32).Value = _entidad.Telefono_fijo;
                     cmd.Parameters.Add("V_TELEFONO_MOVIL", OracleDbType.Int32).Value = _entidad.Telefono_movil;
                     cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _entidad.Estado;
@@ -159,7 +156,7 @@ namespace Process.Datos
         }
 
         public int ActualizarUsuarioSinEntidad(string _rut_usuario, string _primer_nombre, string _segundo_nombre, string _primer_apellido
-                                            , string _segundo_apellido, string _direccion, string _correo, int _telefono_fijp
+                                            , string _segundo_apellido, string _direccion, int _telefono_fijp
                                             , int _telefono_movil, int _estado, int _id_comuna)
         {
             OracleCommand cmd = null;
@@ -177,7 +174,6 @@ namespace Process.Datos
                 cmd.Parameters.Add("V_PRIMER_APELLIDO", OracleDbType.NVarchar2).Value = _primer_apellido;
                 cmd.Parameters.Add("V_SEGUNDO_APELLIDO", OracleDbType.NVarchar2).Value = _segundo_apellido;
                 cmd.Parameters.Add("V_DIRECCION", OracleDbType.NVarchar2).Value = _direccion;
-                cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _correo;
                 cmd.Parameters.Add("V_TELEFONO_FIJO", OracleDbType.Int32).Value = _telefono_fijp;
                 cmd.Parameters.Add("V_TELEFONO_MOVIL", OracleDbType.Int32).Value = _telefono_movil;
                 cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _estado;

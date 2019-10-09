@@ -14,12 +14,14 @@ namespace Process.Modelos
         private string _contrasena;
         private int _estado;
         private int _id_rol;
+        private string _correo;
 
         public string Rut_usuario { get => _rut_usuario; set => _rut_usuario = value; }
         public string Rut_empresa { get => _rut_empresa; set => _rut_empresa = value; }
         public string Contrasena { get => _contrasena; set => _contrasena = value; }
         public int Estado { get => _estado; set => _estado = value; }
         public int Id_rol { get => _id_rol; set => _id_rol = value; }
+        public string Correo { get => _correo; set => _correo = value; }
 
         public DataSet toDataSet()
         {
@@ -32,11 +34,13 @@ namespace Process.Modelos
             dt.Columns.Add(new DataColumn("Contrasena"));
             dt.Columns.Add(new DataColumn("Estado"));
             dt.Columns.Add(new DataColumn("Id_rol"));
+            dt.Columns.Add(new DataColumn("Correo"));
             dr["Rut_usuario"] = Rut_usuario;
             dr["Rut_empresa"] = Rut_empresa;
             dr["Contrasena"] = Contrasena;
             dr["Estado"] = Estado;
             dr["Id_rol"] = Id_rol;
+            dr["Correo"] = Correo;
             dt.Rows.Add(dr);
             ds.Tables.Add(dt);
             return ds;
@@ -96,6 +100,16 @@ namespace Process.Modelos
                 catch (Exception ex)
                 {
                     Id_rol = 0;
+                    string MensajeError = ex.Message;
+                }
+                //Correo
+                try
+                {
+                    Correo = dr["Correo"].ToString();
+                }
+                catch (Exception ex)
+                {
+                    Correo = string.Empty;
                     string MensajeError = ex.Message;
                 }
             }

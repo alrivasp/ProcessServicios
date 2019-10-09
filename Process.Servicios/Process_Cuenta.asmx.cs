@@ -48,13 +48,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int InsertarCuentaSinEntidad_Escritorio(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol)
+        public int InsertarCuentaSinEntidad_Escritorio(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol, string _correo)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                retorno = cuentaNE.InsertarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol);
+                retorno = cuentaNE.InsertarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol, _correo);
                 return retorno;
 
             }
@@ -88,13 +88,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int ActualizarCuentaSinEntidad_Escritorio(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol)
+        public int ActualizarCuentaSinEntidad_Escritorio(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol, string _correo)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                retorno = cuentaNE.ActualizarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol);
+                retorno = cuentaNE.ActualizarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol, _correo);
                 return retorno;
 
             }

@@ -30,12 +30,12 @@ namespace Process.Negocios
 
         }
 
-        public int InsertarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol)
+        public int InsertarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol, string _correo)
         {
             try
             {
                 int retorno = 0;
-                retorno = cuentaDA.InsertarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol);
+                retorno = cuentaDA.InsertarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol, _correo);
                 return retorno;
 
             }
@@ -64,12 +64,12 @@ namespace Process.Negocios
 
         }
 
-        public int ActualizarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol)
+        public int ActualizarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol, string _correo)
         {
             try
             {
                 int retorno = 0;
-                retorno = cuentaDA.ActualizarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol);
+                retorno = cuentaDA.ActualizarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol, _correo);
                 return retorno;
 
             }

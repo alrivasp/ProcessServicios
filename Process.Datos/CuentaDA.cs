@@ -29,6 +29,7 @@ namespace Process.Datos
                     cmd.Parameters.Add("V_CONTRASENA", OracleDbType.NVarchar2).Value = _entidad.Contrasena;
                     cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _entidad.Estado;
                     cmd.Parameters.Add("V_ID_ROL", OracleDbType.Int32).Value = _entidad.Id_rol;
+                    cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _entidad.Correo;
 
                     OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
                     retorno.Direction = ParameterDirection.Output;
@@ -55,7 +56,7 @@ namespace Process.Datos
             return respuesta;
         }
 
-        public int InsertarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol)
+        public int InsertarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol, string _correo)
         {
             OracleCommand cmd = null;
             int respuesta = 0;
@@ -71,6 +72,7 @@ namespace Process.Datos
                 cmd.Parameters.Add("V_CONTRASENA", OracleDbType.NVarchar2).Value = _contrasena;
                 cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _estado;
                 cmd.Parameters.Add("V_ID_ROL", OracleDbType.Int32).Value = _id_rol;
+                cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _correo;
 
                 OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
                 retorno.Direction = ParameterDirection.Output;
@@ -113,6 +115,7 @@ namespace Process.Datos
                     cmd.Parameters.Add("V_CONTRASENA", OracleDbType.NVarchar2).Value = _entidad.Contrasena;
                     cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _entidad.Estado;
                     cmd.Parameters.Add("V_ID_ROL", OracleDbType.Int32).Value = _entidad.Id_rol;
+                    cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _entidad.Correo;
 
                     OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
                     retorno.Direction = ParameterDirection.Output;
@@ -138,7 +141,7 @@ namespace Process.Datos
             return respuesta;
         }
 
-        public int ActualizarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol)
+        public int ActualizarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol, string _correo)
         {
             OracleCommand cmd = null;
             int respuesta = 0;
@@ -154,6 +157,7 @@ namespace Process.Datos
                 cmd.Parameters.Add("V_CONTRASENA", OracleDbType.NVarchar2).Value = _contrasena;
                 cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _estado;
                 cmd.Parameters.Add("V_ID_ROL", OracleDbType.Int32).Value = _id_rol;
+                cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _correo;
 
                 OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
                 retorno.Direction = ParameterDirection.Output;
