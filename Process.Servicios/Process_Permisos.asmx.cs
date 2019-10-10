@@ -8,35 +8,34 @@ using Process.Modelos;
 using Process.Negocios;
 using System.Data;
 
+
 namespace Process.Servicios
 {
     /// <summary>
-    /// Descripción breve de Process_Rol
+    /// Descripción breve de Process_Permisos
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // Para permitir que se llame a este servicio web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente. 
     // [System.Web.Script.Services.ScriptService]
-    public class Process_Rol : System.Web.Services.WebService
+    public class Process_Permisos : System.Web.Services.WebService
     {
-
-        private RolNE rolNE = new RolNE();
-        private Rol rol = new Rol();
+        private PermisosNE permisosNE = new PermisosNE();
+        private Permisos permisos = new Permisos();
 
         //////////////////////////////////////
         ////Web Metodos para APP de Escritorio
         //////////////////////////////////////
+
         [WebMethod]
-        public int InsertarRolConEntidad_Escritorio(DataSet _unidad)
+        public int InsertarPermisosSinEntidad_Escritorio(int _id_acceso, int _rol)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                rol = new Rol();
-                rol.FillFromDataSet(_unidad);
-                retorno = rolNE.InsertarRolConEntidad(rol);
+                retorno = permisosNE.InsertarPermisosSinEntidad(_id_acceso, _rol);
                 return retorno;
 
             }
@@ -49,13 +48,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int InsertarRolSinEntidad_Escritorio(string _nombre, int _estado)
+        public int ActualizarPermisosSinEntidad_Escritorio(int _id_acceso, int _rol)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                retorno = rolNE.InsertarRolSinEntidad(_nombre, _estado);
+                retorno = permisosNE.ActualizarPermisosSinEntidad(_id_acceso, _rol);
                 return retorno;
 
             }
@@ -68,53 +67,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int ActualizarRolConEntidad_Escritorio(DataSet _unidad)
-        {
-            try
-            {
-                CadenaConexion();
-                int retorno = 0;
-                rol = new Rol();
-                rol.FillFromDataSet(_unidad);
-                retorno = rolNE.ActualizarRolConEntidad(rol);
-                return retorno;
-
-            }
-            catch (Exception)
-            {
-                return -1;
-
-            }
-
-        }
-
-        [WebMethod]
-        public int ActualizarRolSinEntidad_Escritorio(int _id_rol, string _nombre,int _estado)
-        {
-            try
-            {
-                CadenaConexion();
-                int retorno = 0;
-                retorno = rolNE.ActualizarRolSinEntidad(_id_rol, _nombre, _estado);
-                return retorno;
-
-            }
-            catch (Exception)
-            {
-                return -1;
-
-            }
-
-        }
-
-        [WebMethod]
-        public DataSet TraerRolSinEntidad_Escritorio(int _id_rol)
+        public DataSet TraerPermisosPorAccesoPorRolSinEntidad_Escritorio(int _id_acceso, int _rol)
         {
             try
             {
                 CadenaConexion();
                 DataSet retorno = new DataSet();
-                retorno = rolNE.TraerRolSinEntidad(_id_rol);
+                retorno = permisosNE.TraerPermisosPorAccesoPorRolSinEntidad(_id_acceso, _rol);
                 return retorno;
 
             }
@@ -127,13 +86,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public DataSet TraerRolPorNombreSinEntidad_Escritorio(string _nombre)
+        public DataSet TraerPermisosPorRolSinEntidad_Escritorio(int _rol)
         {
             try
             {
                 CadenaConexion();
                 DataSet retorno = new DataSet();
-                retorno = rolNE.TraerRolPorNombreSinEntidad(_nombre);
+                retorno = permisosNE.TraerPermisosPorRolSinEntidad(_rol);
                 return retorno;
 
             }
@@ -146,70 +105,13 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public Rol TraerRolConEntidad_Escritorio(int _id_rol)
+        public Permisos TraerPermisosPorRolConEntidad_Escritorio(int _id_rol)
         {
             try
             {
                 CadenaConexion();
-                Rol retorno = new Rol();
-                retorno = rolNE.TraerRolConEntidad(_id_rol);
-                return retorno;
-
-            }
-            catch (Exception)
-            {
-                throw;
-
-            }
-
-        }
-
-        [WebMethod]
-        public Rol TraerRolPorNombreConEntidad_Escritorio(string _nombre)
-        {
-            try
-            {
-                CadenaConexion();
-                Rol retorno = new Rol();
-                retorno = rolNE.TraerRolPorNombreConEntidad(_nombre);
-                return retorno;
-
-            }
-            catch (Exception)
-            {
-                throw;
-
-            }
-
-        }
-
-        [WebMethod]
-        public DataSet TraerTodasRoles_Escritorio()
-        {
-            try
-            {
-                CadenaConexion();
-                DataSet retorno = new DataSet();
-                retorno = rolNE.TraerTodasRoles();
-                return retorno;
-
-            }
-            catch (Exception)
-            {
-                throw;
-
-            }
-
-        }
-
-        [WebMethod]
-        public DataSet TraerRolConClaveSinEntidad_Escritorio(string _palabra_clave)
-        {
-            try
-            {
-                CadenaConexion();
-                DataSet retorno = new DataSet();
-                retorno = rolNE.TraerRolConClaveSinEntidad(_palabra_clave);
+                Permisos retorno = new Permisos();
+                retorno = permisosNE.TraerPermisosPorRolConEntidad(_id_rol);
                 return retorno;
 
             }
@@ -250,5 +152,6 @@ namespace Process.Servicios
 
             Global.CadenaConexionGlobal = sqlString;
         }
+
     }
 }

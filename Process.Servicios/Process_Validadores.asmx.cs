@@ -32,5 +32,12 @@ namespace Process.Servicios
             ValidadoresNE auxNegocio = new ValidadoresNE();
             return auxNegocio.validarRut(rut);
         }
+
+        [WebMethod]
+        public bool correoValidacionService(string email)
+        {
+            ValidadoresNE auxNegocio = new ValidadoresNE();
+            return auxNegocio.validaCorreo(email);
+        }
     }
 }

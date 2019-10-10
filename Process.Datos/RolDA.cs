@@ -250,6 +250,88 @@ namespace Process.Datos
             return rol;
         }
 
+        public Rol TraerRolPorNombreConEntidad(string _nombre)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            Rol rol = new Rol();
+            try
+            {
+                string procedure = "ROL_TRAER_ROL_NOMBRE";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _nombre;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_ROL", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                    rol.FillFromDataSet(datos);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return rol;
+        }
+
+        public DataSet TraerRolPorNombreSinEntidad(string _nombre)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "ROL_TRAER_ROL_NOMBRE";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _nombre;                
+
+                OracleParameter retorno = cmd.Parameters.Add("C_ROL", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
+
         public DataSet TraerTodosRoles()
         {
             OracleCommand cmd = null;
@@ -264,6 +346,46 @@ namespace Process.Datos
                 cmd.CommandType = CommandType.StoredProcedure;
              
                 OracleParameter retorno = cmd.Parameters.Add("C_ROLES", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
+
+        public DataSet TraerRolConClaveSinEntidad(string _palabra_clave)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "ROL_TRAER_ROL_CLAVE";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _palabra_clave;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_ROL", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;
 
                 cmd.Connection.Open();

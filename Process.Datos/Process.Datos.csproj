@@ -50,9 +50,11 @@
     <Compile Include="AccesoDA.cs" />
     <Compile Include="AutentificacionDA.cs" />
     <Compile Include="CargoDA.cs" />
+    <Compile Include="CargosUsuariosDA.cs" />
     <Compile Include="ComunaDA.cs" />
     <Compile Include="CuentaDA.cs" />
     <Compile Include="EmpresaDA.cs" />
+    <Compile Include="PermisosDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaDA.cs" />
     <Compile Include="RegionDA.cs" />

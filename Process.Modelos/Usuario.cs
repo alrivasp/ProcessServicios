@@ -15,7 +15,7 @@ namespace Process.Modelos
         private string _primer_apellido;
         private string _segundo_apellido;
         private string _direccion;
-        private string _correo;
+        
         private int _telefono_fijo;
         private int _telefono_movil;
         private int _estado;
@@ -26,8 +26,7 @@ namespace Process.Modelos
         public string Segundo_nombre { get => _segundo_nombre; set => _segundo_nombre = value; }
         public string Primer_apellido { get => _primer_apellido; set => _primer_apellido = value; }
         public string Segundo_apellido { get => _segundo_apellido; set => _segundo_apellido = value; }
-        public string Direccion { get => _direccion; set => _direccion = value; }
-        public string Correo { get => _correo; set => _correo = value; }
+        public string Direccion { get => _direccion; set => _direccion = value; }        
         public int Telefono_fijo { get => _telefono_fijo; set => _telefono_fijo = value; }
         public int Telefono_movil { get => _telefono_movil; set => _telefono_movil = value; }
         public int Estado { get => _estado; set => _estado = value; }
@@ -44,8 +43,7 @@ namespace Process.Modelos
             dt.Columns.Add(new DataColumn("Segundo_nombre"));
             dt.Columns.Add(new DataColumn("Primer_apellido"));
             dt.Columns.Add(new DataColumn("Segundo_apellido"));
-            dt.Columns.Add(new DataColumn("Direccion"));
-            dt.Columns.Add(new DataColumn("Correo"));
+            dt.Columns.Add(new DataColumn("Direccion"));            
             dt.Columns.Add(new DataColumn("Telefono_fijo"));
             dt.Columns.Add(new DataColumn("Telefono_movil"));
             dt.Columns.Add(new DataColumn("Estado"));
@@ -55,8 +53,7 @@ namespace Process.Modelos
             dr["Segundo_nombre"] = Segundo_nombre;
             dr["Primer_apellido"] = Primer_apellido;
             dr["Segundo_apellido"] = Segundo_apellido;
-            dr["Direccion"] = Direccion;
-            dr["Correo"] = Correo;
+            dr["Direccion"] = Direccion;            
             dr["Telefono_fijo"] = Telefono_fijo;
             dr["Telefono_movil"] = Telefono_movil;
             dr["Estado"] = Estado;
@@ -131,17 +128,7 @@ namespace Process.Modelos
                 {
                     Direccion = string.Empty;
                     string MensajeError = ex.Message;
-                }
-                //Correo
-                try
-                {
-                    Correo = dr["Correo"].ToString();
-                }
-                catch (Exception ex)
-                {
-                    Correo = string.Empty;
-                    string MensajeError = ex.Message;
-                }
+                }               
                 //Telefono_fijo
                 try
                 {

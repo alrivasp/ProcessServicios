@@ -31,14 +31,14 @@ namespace Process.Negocios
         }
 
         public int InsertarrUsuarioSinEntidad(string _rut_usuario, string _primer_nombre, string _segundo_nombre, string _primer_apellido
-                                            , string _segundo_apellido, string _direccion, string _correo, int _telefono_fijp
+                                            , string _segundo_apellido, string _direccion, int _telefono_fijp
                                             , int _telefono_movil, int _estado, int _id_comuna)
         {
             try
             {
                 int retorno = 0;
                 retorno = usuarioDA.InsertarUsuarioSinEntidad(_rut_usuario, _primer_nombre, _segundo_nombre, _primer_apellido, _segundo_apellido
-                                                              , _direccion, _correo, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
+                                                              , _direccion, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
                 return retorno;
 
             }
@@ -68,14 +68,14 @@ namespace Process.Negocios
         }
 
         public int ActualizarrUsuarioSinEntidad(string _rut_usuario, string _primer_nombre, string _segundo_nombre, string _primer_apellido
-                                            , string _segundo_apellido, string _direccion, string _correo, int _telefono_fijp
+                                            , string _segundo_apellido, string _direccion, int _telefono_fijp
                                             , int _telefono_movil, int _estado, int _id_comuna)
         {
             try
             {
                 int retorno = 0;
                 retorno = usuarioDA.ActualizarUsuarioSinEntidad(_rut_usuario, _primer_nombre, _segundo_nombre, _primer_apellido, _segundo_apellido
-                                                              , _direccion, _correo, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
+                                                              , _direccion, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
                 return retorno;
 
             }
@@ -121,12 +121,63 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerUsuarioConClaveSinEntidad(string _palabra_clave)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = usuarioDA.TraerUsuarioConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerUsuarioPorRutPorEmpresaSinEntidad(string _rut_usuario, string _rut_usuario_rut_empresa)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = usuarioDA.TraerUsuarioPorRutPorEmpresaSinEntidad(_rut_usuario, _rut_usuario_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         public DataSet TraerTodasrUsuarios()
         {
             try
             {
                 DataSet retorno = new DataSet();
                 retorno = usuarioDA.TraerTodasUsuarios();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerTodasUsuariosJoin()
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = usuarioDA.TraerTodasUsuariosJoin();
                 return retorno;
 
             }
