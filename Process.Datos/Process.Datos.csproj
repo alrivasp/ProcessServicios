@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDA.cs" />
+    <Compile Include="AutentificacionDA.cs" />
     <Compile Include="CargoDA.cs" />
     <Compile Include="ComunaDA.cs" />
     <Compile Include="CuentaDA.cs" />

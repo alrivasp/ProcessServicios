@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Process_Acceso.asmx" />
+    <Content Include="Process_Autentificacion.asmx" />
     <Content Include="Process_Cargo.asmx" />
     <Content Include="Process_Comuna.asmx" />
     <Content Include="Process_Cuenta.asmx" />
@@ -89,6 +90,10 @@
   <ItemGroup>
     <Compile Include="Process_Acceso.asmx.cs">
       <DependentUpon>Process_Acceso.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Autentificacion.asmx.cs">
+      <DependentUpon>Process_Autentificacion.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Process_Cargo.asmx.cs">
@@ -136,6 +141,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Process.Servicios.pubxml" />
+    <None Include="Properties\PublishProfiles\ProcessServicios.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
