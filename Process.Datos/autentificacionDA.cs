@@ -53,7 +53,7 @@ namespace Process.Datos
             OracleCommand cmd = null;
             OracleDataReader dr = null;
             DataSet datos = new DataSet();
-            DataTable dt = new DataTable("datos");
+            DataTable dt = new DataTable();
             try
             {
                 string procedure = "CUENTA_TRAER_SESION";
@@ -94,7 +94,7 @@ namespace Process.Datos
             OracleCommand cmd = null;
             OracleDataReader dr = null;
             DataSet datos = new DataSet();
-            DataTable dt = new DataTable("datos");
+            DataTable dt = new DataTable();
             try
             {
                 string procedure = "PERMISOS_TRAER_PERMISO_USUARIO";

@@ -50,6 +50,25 @@ namespace Process.Servicios
            
         }
 
+        [WebMethod]
+        public DataSet TraerSesionUsuario_Escritorio(string _rut_usuario)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                string _rut_empresa = string.Empty;
+                retorno = autentificacionNE.TraerSesionUsuario(_rut_usuario, _rut_empresa);
+                return retorno;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+
         //////////////////////////////////////
         ////Web Metodos para APP WEB
         //////////////////////////////////////
@@ -83,6 +102,7 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                Context.Response.ContentType = "application/json";
                 Context.Response.Write("Error : "+ex.Message);
             }
 
@@ -98,7 +118,7 @@ namespace Process.Servicios
                 DataSet retornoSesion = new DataSet();
                 DataSet retornoPermisos = new DataSet();
 
-                dynamic dataJson = new ExpandoObject(); //Objeto json
+                dynamic dataJson = new ExpandoObject();//Objeto json
                 dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
                 dynamic data = new ExpandoObject();
 
@@ -110,8 +130,8 @@ namespace Process.Servicios
                 retornoSesion = autentificacionNE.TraerSesionUsuario(_rut_usuario, _rut_empresa);//se envian variables
                 retornoPermisos = autentificacionNE.TraerPermisosUsuario(_rut_usuario, _rut_empresa);
 
-                data.sesion = retornoSesion.Tables["datos"];
-                data.permisos = retornoPermisos.Tables["datos"];
+                data.sesion = retornoSesion.Tables[0];
+                data.permisos = retornoPermisos.Tables[0];
 
                 datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
 
@@ -123,6 +143,7 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                Context.Response.ContentType = "application/json";
                 Context.Response.Write("Error : " + ex.Message);
             }
 
