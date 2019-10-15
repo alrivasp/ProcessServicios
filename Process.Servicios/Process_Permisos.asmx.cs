@@ -66,6 +66,26 @@ namespace Process.Servicios
 
         }
 
+
+        [WebMethod]
+        public int EliminarPermisosSinEntidad_Escritorio(int _rol)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+                retorno = permisosNE.EliminarPermisosSinEntidad(_rol);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
+
         [WebMethod]
         public DataSet TraerPermisosPorAccesoPorRolSinEntidad_Escritorio(int _id_acceso, int _rol)
         {

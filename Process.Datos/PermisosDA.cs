@@ -85,7 +85,43 @@ namespace Process.Datos
 
             return respuesta;
         }
-      
+
+        public int EliminarPermisosSinEntidad(int _rol)
+        {
+            OracleCommand cmd = null;
+            int respuesta = 0;
+            try
+            {
+                string procedure = "PERMISOS_BORRAR";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                cmd.Parameters.Add("V_ID_ROL", OracleDbType.Int32).Value = _rol;
+
+                OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                cmd.ExecuteNonQuery();
+                object resultado = retorno.Value;
+                respuesta = Int32.Parse(resultado.ToString());
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+                respuesta = -1;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return respuesta;
+        }
+
         public DataSet TraerPermisosPorAccesoPorRolSinEntidad(int _id_acceso, int _rol)
         {
             OracleCommand cmd = null;

@@ -84,6 +84,25 @@ namespace Process.Servicios
 
         }
 
+        [WebMethod]
+        public DataSet TraerCargosUsuarioPorRutSinEntidad_Escritorio(string _rut_usuario)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = cargosUsuariosNE.TraerCargosUsuarioPorRutSinEntidad(_rut_usuario);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
 
         //////////////////////////////////////
         ////Web Metodos para APP WEB

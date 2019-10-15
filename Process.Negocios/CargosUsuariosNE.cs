@@ -64,5 +64,21 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerCargosUsuarioPorRutSinEntidad(string _rut_usuario)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = cargosUsuariosDA.TraerCargosUsuarioPorRutSinEntidad(_rut_usuario);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

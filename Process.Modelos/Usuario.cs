@@ -15,10 +15,8 @@ namespace Process.Modelos
         private string _primer_apellido;
         private string _segundo_apellido;
         private string _direccion;
-        
         private int _telefono_fijo;
-        private int _telefono_movil;
-        private int _estado;
+        private int _telefono_movil;        
         private int _id_comuna;
 
         public string Rut_usuario { get => _rut_usuario; set => _rut_usuario = value; }
@@ -28,8 +26,7 @@ namespace Process.Modelos
         public string Segundo_apellido { get => _segundo_apellido; set => _segundo_apellido = value; }
         public string Direccion { get => _direccion; set => _direccion = value; }        
         public int Telefono_fijo { get => _telefono_fijo; set => _telefono_fijo = value; }
-        public int Telefono_movil { get => _telefono_movil; set => _telefono_movil = value; }
-        public int Estado { get => _estado; set => _estado = value; }
+        public int Telefono_movil { get => _telefono_movil; set => _telefono_movil = value; }       
         public int Id_comuna { get => _id_comuna; set => _id_comuna = value; }
 
         public DataSet toDataSet()
@@ -45,8 +42,7 @@ namespace Process.Modelos
             dt.Columns.Add(new DataColumn("Segundo_apellido"));
             dt.Columns.Add(new DataColumn("Direccion"));            
             dt.Columns.Add(new DataColumn("Telefono_fijo"));
-            dt.Columns.Add(new DataColumn("Telefono_movil"));
-            dt.Columns.Add(new DataColumn("Estado"));
+            dt.Columns.Add(new DataColumn("Telefono_movil"));            
             dt.Columns.Add(new DataColumn("Id_comuna"));
             dr["Rut_usuario"] = Rut_usuario;
             dr["Primer_nombre"] = Primer_nombre;
@@ -55,8 +51,7 @@ namespace Process.Modelos
             dr["Segundo_apellido"] = Segundo_apellido;
             dr["Direccion"] = Direccion;            
             dr["Telefono_fijo"] = Telefono_fijo;
-            dr["Telefono_movil"] = Telefono_movil;
-            dr["Estado"] = Estado;
+            dr["Telefono_movil"] = Telefono_movil;            
             dr["Id_comuna"] = Id_comuna;
             dt.Rows.Add(dr);
             ds.Tables.Add(dt);
@@ -148,17 +143,7 @@ namespace Process.Modelos
                 {
                     Telefono_movil = 0;
                     string MensajeError = ex.Message;
-                }
-                //Estado
-                try
-                {
-                    Estado = Int32.Parse(dr["Estado"].ToString());
-                }
-                catch (Exception ex)
-                {
-                    Estado = 0;
-                    string MensajeError = ex.Message;
-                }               
+                }                     
                 //Id_comuna
                 try
                 {

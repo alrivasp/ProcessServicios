@@ -51,14 +51,14 @@ namespace Process.Servicios
         [WebMethod]
         public int InsertarUsuarioSinEntidad_Escritorio(string _rut_usuario, string _primer_nombre, string _segundo_nombre, string _primer_apellido
                                             , string _segundo_apellido, string _direccion, int _telefono_fijp
-                                            , int _telefono_movil, int _estado, int _id_comuna)
+                                            , int _telefono_movil, int _id_comuna)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
                 retorno = usuarioNE.InsertarrUsuarioSinEntidad(_rut_usuario, _primer_nombre, _segundo_nombre, _primer_apellido, _segundo_apellido
-                                                              , _direccion, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
+                                                              , _direccion, _telefono_fijp, _telefono_movil, _id_comuna);
                 return retorno;
 
             }
@@ -94,14 +94,14 @@ namespace Process.Servicios
         [WebMethod]
         public int ActualizarUsuarioSinEntidad_Escritorio(string _rut_usuario, string _primer_nombre, string _segundo_nombre, string _primer_apellido
                                             , string _segundo_apellido, string _direccion, int _telefono_fijp
-                                            , int _telefono_movil, int _estado, int _id_comuna)
+                                            , int _telefono_movil, int _id_comuna)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
                 retorno = usuarioNE.ActualizarrUsuarioSinEntidad(_rut_usuario, _primer_nombre, _segundo_nombre, _primer_apellido, _segundo_apellido
-                                                              , _direccion, _telefono_fijp, _telefono_movil, _estado, _id_comuna);
+                                                              , _direccion, _telefono_fijp, _telefono_movil, _id_comuna);
                 return retorno;
 
             }
@@ -190,6 +190,25 @@ namespace Process.Servicios
         }
 
         [WebMethod]
+        public DataSet TraerUsuarioPorEmpresaSinEntidad_Escritorio(string _rut_empresa)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = usuarioNE.TraerUsuarioPorEmpresaSinEntidad(_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
         public DataSet TraerTodasUsuariosJoin_Escritorio()
         {
             try
@@ -216,6 +235,44 @@ namespace Process.Servicios
                 CadenaConexion();
                 DataSet retorno = new DataSet();
                 retorno = usuarioNE.TraerUsuarioConClaveSinEntidad(_palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public DataSet TraerUsuarioConClavePorEmpresaSinEntidad_Escritorio(string _rut_empresa, string _palabra_clave)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = usuarioNE.TraerUsuarioConClavePorEmpresaSinEntidad(_rut_empresa, _palabra_clave);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public DataSet TraerUsuarioConFiltroSinEntidad_Escritorio(string _palabra_clave)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = usuarioNE.TraerUsuarioConFiltroSinEntidad(_palabra_clave);
                 return retorno;
 
             }

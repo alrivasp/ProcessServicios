@@ -47,6 +47,23 @@ namespace Process.Negocios
 
         }
 
+        public int EliminarPermisosSinEntidad( int _rol)
+        {
+            try
+            {
+                int retorno = 0;
+                retorno = permisosDA.EliminarPermisosSinEntidad( _rol);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
+
         public DataSet TraerPermisosPorAccesoPorRolSinEntidad(int _id_acceso, int _rol)
         {
             try
