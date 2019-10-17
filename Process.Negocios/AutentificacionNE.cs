@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Process.Datos;
+using Process.Modelos;
 
 namespace Process.Negocios
 {
@@ -18,6 +19,7 @@ namespace Process.Negocios
             try
             {
                 int retorno = 0;
+                Global.Encriptar(_contrasena);
                 retorno = autentificacionDA.Login(_rut_usuario, _contrasena);
                 return retorno;
 

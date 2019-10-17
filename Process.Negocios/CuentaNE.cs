@@ -18,6 +18,7 @@ namespace Process.Negocios
             try
             {
                 int retorno = 0;
+                Global.Encriptar(_unidad.Contrasena);
                 retorno = cuentaDA.InsertarCuentaConEntidad(_unidad);
                 return retorno;
 
@@ -35,6 +36,7 @@ namespace Process.Negocios
             try
             {
                 int retorno = 0;
+                Global.Encriptar(_contrasena);
                 retorno = cuentaDA.InsertarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol, _correo);
                 return retorno;
 

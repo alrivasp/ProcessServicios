@@ -11,7 +11,7 @@ namespace Process.Modelos
     public class Global
     {
         public static OracleConnection CadenaConexionGlobal;
-        private static String HASH = "";//mensaje hash de contraseña
+        private static String HASH = "Process2019";//mensaje hash de contraseña
 
         public static string Encriptar(string Password)
         {
