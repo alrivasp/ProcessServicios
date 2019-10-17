@@ -98,6 +98,23 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerUnidadPorEmpresaSinEntidad(string _rut_empresa)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = unidadDA.TraerUnidadPorEmpresaSinEntidad(_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         public Unidad TraerUnidadConEntidad(int _id_unidad, string _rut_empresa)
         {
             try

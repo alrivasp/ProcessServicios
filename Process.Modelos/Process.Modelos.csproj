@@ -53,6 +53,7 @@
     <Compile Include="Comuna.cs" />
     <Compile Include="Cuenta.cs" />
     <Compile Include="Empresa.cs" />
+    <Compile Include="Equipo.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Permisos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Rol.cs" />
     <Compile Include="Unidad.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="UsuarioEquipo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

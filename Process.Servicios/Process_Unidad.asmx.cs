@@ -126,6 +126,25 @@ namespace Process.Servicios
         }
 
         [WebMethod]
+        public DataSet TraerUnidadPorEmpresaSinEntidad_Escritorio(string _rut_empresa)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = unidadNE.TraerUnidadPorEmpresaSinEntidad(_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
         public Unidad TraerUnidadConEntidad_Escritorio(int _id_unidad, string _rut_empresa)
         {
             try

@@ -80,12 +80,14 @@
     <Content Include="Process_Comuna.asmx" />
     <Content Include="Process_Cuenta.asmx" />
     <Content Include="Process_Empresa.asmx" />
+    <Content Include="Process_Equipo.asmx" />
     <Content Include="Process_Permisos.asmx" />
     <Content Include="Process_Provincia.asmx" />
     <Content Include="Process_Region.asmx" />
     <Content Include="Process_Rol.asmx" />
     <Content Include="Process_Unidad.asmx" />
     <Content Include="Process_Usuario.asmx" />
+    <Content Include="Process_UsuarioEquipo.asmx" />
     <Content Include="Process_Validadores.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -118,6 +120,10 @@
       <DependentUpon>Process_Empresa.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Process_Equipo.asmx.cs">
+      <DependentUpon>Process_Equipo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Process_Permisos.asmx.cs">
       <DependentUpon>Process_Permisos.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -140,6 +146,10 @@
     </Compile>
     <Compile Include="Process_Usuario.asmx.cs">
       <DependentUpon>Process_Usuario.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_UsuarioEquipo.asmx.cs">
+      <DependentUpon>Process_UsuarioEquipo.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Process_Validadores.asmx.cs">
