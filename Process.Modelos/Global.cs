@@ -11,9 +11,9 @@ namespace Process.Modelos
     public class Global
     {
         public static OracleConnection CadenaConexionGlobal;
-        private static String HASH = "Process2019";//mensaje hash de contraseña
+        public String HASH = "Process2019";//mensaje hash de contraseña
 
-        public static string Encriptar(string Password)
+        public string Encriptar(string Password)
         {
             System.Security.Cryptography.SHA512Managed HashTool = new System.Security.Cryptography.SHA512Managed();
             Byte[] PasswordAsByte = System.Text.Encoding.UTF8.GetBytes(string.Concat(Password, HASH));

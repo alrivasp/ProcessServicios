@@ -12,13 +12,14 @@ namespace Process.Negocios
     public class CuentaNE
     {
         private CuentaDA cuentaDA = new CuentaDA();
+        private Global global = new Global();
 
         public int InsertarCuentaConEntidad(Cuenta _unidad)
         {
             try
             {
                 int retorno = 0;
-                Global.Encriptar(_unidad.Contrasena);
+                _unidad.Contrasena = global.Encriptar(_unidad.Contrasena);
                 retorno = cuentaDA.InsertarCuentaConEntidad(_unidad);
                 return retorno;
 
@@ -36,7 +37,7 @@ namespace Process.Negocios
             try
             {
                 int retorno = 0;
-                Global.Encriptar(_contrasena);
+                _contrasena = global.Encriptar(_contrasena);
                 retorno = cuentaDA.InsertarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol, _correo);
                 return retorno;
 

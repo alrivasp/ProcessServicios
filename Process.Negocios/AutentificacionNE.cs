@@ -12,6 +12,7 @@ namespace Process.Negocios
     public class AutentificacionNE
     {
         private AutentificacionDA autentificacionDA = new AutentificacionDA();
+        private Global global = new Global();
 
         public int Login(string _rut_usuario, string _contrasena)
         {
@@ -19,7 +20,7 @@ namespace Process.Negocios
             try
             {
                 int retorno = 0;
-                Global.Encriptar(_contrasena);
+                _contrasena = global.Encriptar(_contrasena);
                 retorno = autentificacionDA.Login(_rut_usuario, _contrasena);
                 return retorno;
 
