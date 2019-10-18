@@ -104,6 +104,25 @@ namespace Process.Servicios
 
         }
 
+        [WebMethod]
+        public int EliminarUsuarioEquipoSinEntidad_Escritorio(int _id_equipo)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+                retorno = usuarioEquipoNE.EliminarUsuarioEquipoSinEntidad(_id_equipo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
+
         //////////////////////////////////////
         ////Web Metodos para APP WEB
         //////////////////////////////////////

@@ -97,5 +97,39 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerEquipoPorNombreSinEntidad(string _nombre, int _id_unidad)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = equipoDA.TraerEquipoPorNombreSinEntidad(_nombre, _id_unidad);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public Equipo TraerEquipoPorNombreConEntidad(string _nombre, int _id_unidad)
+        {
+            try
+            {
+                Equipo retorno = new Equipo();
+                retorno = equipoDA.TraerEquipoPorNombreConEntidad(_nombre, _id_unidad);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

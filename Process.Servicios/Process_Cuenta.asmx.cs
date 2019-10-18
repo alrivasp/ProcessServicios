@@ -88,13 +88,32 @@ namespace Process.Servicios
         }
 
         [WebMethod]
-        public int ActualizarCuentaSinEntidad_Escritorio(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol, string _correo)
+        public int ActualizarCuentaSinEntidad_Escritorio(string _rut_usuario, string _rut_empresa, int _estado, int _id_rol, string _correo)
         {
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-                retorno = cuentaNE.ActualizarCuentaSinEntidad(_rut_usuario, _rut_empresa, _contrasena, _estado, _id_rol, _correo);
+                retorno = cuentaNE.ActualizarCuentaSinEntidad(_rut_usuario, _rut_empresa, _estado, _id_rol, _correo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
+
+        [WebMethod]
+        public int ActualizarCuentaSoloContrasenaSinEntidad_Escritorio(string _rut_usuario, string _rut_empresa, string _contrasena)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+                retorno = cuentaNE.ActualizarCuentaSoloContrasenaSinEntidad(_rut_usuario, _rut_empresa, _contrasena);
                 return retorno;
 
             }

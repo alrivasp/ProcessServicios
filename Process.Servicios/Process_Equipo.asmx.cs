@@ -121,6 +121,44 @@ namespace Process.Servicios
 
         }
 
+        [WebMethod]
+        public DataSet TraerEquipoPorNombreSinEntidad_Escritorio(string _nombre, int _id_unidad)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                retorno = equipoNE.TraerEquipoPorNombreSinEntidad(_nombre, _id_unidad);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        [WebMethod]
+        public Equipo TraerEquipoPorNombreConEntidad_Escritorio(string _nombre, int _id_unidad)
+        {
+            try
+            {
+                CadenaConexion();
+                Equipo retorno = new Equipo();
+                retorno = equipoNE.TraerEquipoPorNombreConEntidad(_nombre, _id_unidad);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         //////////////////////////////////////
         ////Web Metodos para APP WEB
         //////////////////////////////////////

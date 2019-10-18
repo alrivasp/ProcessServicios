@@ -141,7 +141,7 @@ namespace Process.Datos
             return respuesta;
         }
 
-        public int ActualizarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena, int _estado, int _id_rol, string _correo)
+        public int ActualizarCuentaSinEntidad(string _rut_usuario, string _rut_empresa, int _estado, int _id_rol, string _correo)
         {
             OracleCommand cmd = null;
             int respuesta = 0;
@@ -153,11 +153,49 @@ namespace Process.Datos
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("V_RUT_USUARIO", OracleDbType.NVarchar2).Value = _rut_usuario;
-                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
-                cmd.Parameters.Add("V_CONTRASENA", OracleDbType.NVarchar2).Value = _contrasena;
+                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;                
                 cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = _estado;
                 cmd.Parameters.Add("V_ID_ROL", OracleDbType.Int32).Value = _id_rol;
                 cmd.Parameters.Add("V_CORREO", OracleDbType.NVarchar2).Value = _correo;
+
+                OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                cmd.ExecuteNonQuery();
+                object resultado = retorno.Value;
+                respuesta = Int32.Parse(resultado.ToString());
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+                respuesta = -1;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return respuesta;
+        }
+
+        public int ActualizarCuentaSoloContrasenaSinEntidad(string _rut_usuario, string _rut_empresa, string _contrasena)
+        {
+            OracleCommand cmd = null;
+            int respuesta = 0;
+            try
+            {
+                string procedure = "CUENTA_ACTUALIZAR_PASS";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_RUT_USUARIO", OracleDbType.NVarchar2).Value = _rut_usuario;
+                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
+                cmd.Parameters.Add("V_CONTRASENA", OracleDbType.NVarchar2).Value = _contrasena;
+
 
                 OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
                 retorno.Direction = ParameterDirection.Output;

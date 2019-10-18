@@ -80,5 +80,22 @@ namespace Process.Negocios
             }
 
         }
+
+        public int EliminarUsuarioEquipoSinEntidad(int _id_equipo)
+        {
+            try
+            {
+                int retorno = 0;
+                retorno = usuarioEquipoDA.EliminarUsuarioEquipoSinEntidad(_id_equipo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
     }
 }

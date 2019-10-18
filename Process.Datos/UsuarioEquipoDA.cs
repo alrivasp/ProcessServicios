@@ -60,8 +60,8 @@ namespace Process.Datos
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("V_RUT_USUARIO", OracleDbType.Int32).Value = _rut_usuario;
-                cmd.Parameters.Add("V_ID_EQUIPO", OracleDbType.NVarchar2).Value = _id_equipo;
+                cmd.Parameters.Add("V_RUT_USUARIO", OracleDbType.NVarchar2).Value = _rut_usuario;
+                cmd.Parameters.Add("V_ID_EQUIPO", OracleDbType.Int32).Value = _id_equipo;
                 cmd.Parameters.Add("V_RESPONSABLE", OracleDbType.Char).Value = _responsable;
 
                 OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
@@ -168,6 +168,42 @@ namespace Process.Datos
             }
 
             return datos;
+        }
+
+        public int EliminarUsuarioEquipoSinEntidad(int _id_equipo)
+        {
+            OracleCommand cmd = null;
+            int respuesta = 0;
+            try
+            {
+                string procedure = "USUARIO_EQUIPO_BORRAR";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                cmd.Parameters.Add("V_ID_EQUIPO", OracleDbType.Int32).Value = _id_equipo;
+
+                OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                cmd.ExecuteNonQuery();
+                object resultado = retorno.Value;
+                respuesta = Int32.Parse(resultado.ToString());
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+                respuesta = -1;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return respuesta;
         }
     }
 }
