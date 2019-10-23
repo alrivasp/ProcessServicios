@@ -149,6 +149,43 @@ namespace Process.Servicios
 
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerEmpresasUsuario_Web(string json)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retornoEmpresas = new DataSet();
+
+                dynamic dataJson = new ExpandoObject();//Objeto json
+                dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+                dynamic data = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
+
+                string _rut_usuario = dataJson.rut_usuario;
+
+                retornoEmpresas = autentificacionNE.TraerEmpresasUsuario(_rut_usuario);//se envian variables
+
+                data.empresas = retornoEmpresas.Tables[0];
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+
+        }
+
         /// <summary>
         /// CONEXION 
         /// </summary>

@@ -51,6 +51,24 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerEmpresasUsuario(string _rut_usuario)
+        {
+
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = autentificacionDA.TraerEmpresasUsuario(_rut_usuario);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
         public DataSet TraerPermisosUsuario(string _rut_usuario, string _rut_empresa)
         {
 
