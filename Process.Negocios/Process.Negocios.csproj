@@ -55,6 +55,7 @@
     <Compile Include="CuentaNE.cs" />
     <Compile Include="EmpresaNE.cs" />
     <Compile Include="EquipoNE.cs" />
+    <Compile Include="FlujoTipoNE.cs" />
     <Compile Include="PermisosNE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaNE.cs" />

@@ -81,6 +81,7 @@
     <Content Include="Process_Cuenta.asmx" />
     <Content Include="Process_Empresa.asmx" />
     <Content Include="Process_Equipo.asmx" />
+    <Content Include="Process_FlujoTipo.asmx" />
     <Content Include="Process_Permisos.asmx" />
     <Content Include="Process_Provincia.asmx" />
     <Content Include="Process_Region.asmx" />
@@ -122,6 +123,10 @@
     </Compile>
     <Compile Include="Process_Equipo.asmx.cs">
       <DependentUpon>Process_Equipo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_FlujoTipo.asmx.cs">
+      <DependentUpon>Process_FlujoTipo.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Process_Permisos.asmx.cs">

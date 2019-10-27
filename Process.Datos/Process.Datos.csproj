@@ -55,6 +55,7 @@
     <Compile Include="CuentaDA.cs" />
     <Compile Include="EmpresaDA.cs" />
     <Compile Include="EquipoDA.cs" />
+    <Compile Include="FlujoTipoDA.cs" />
     <Compile Include="PermisosDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaDA.cs" />
