@@ -48,12 +48,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acceso.cs" />
+    <Compile Include="Archivo.cs" />
     <Compile Include="Cargo.cs" />
     <Compile Include="CargosUsuarios.cs" />
     <Compile Include="Comuna.cs" />
     <Compile Include="Cuenta.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="Equipo.cs" />
+    <Compile Include="EstadoTarea.cs" />
+    <Compile Include="Flujo.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Permisos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
