@@ -35,17 +35,17 @@ namespace Process.Modelos
             dt.Columns.Add(new DataColumn("Id_flujo"));
             dt.Columns.Add(new DataColumn("Fecha_implementacion"));
             dt.Columns.Add(new DataColumn("Modificacion_fecha_hora"));
-            dt.Columns.Add(new DataColumn("Id_acceso"));
-            dt.Columns.Add(new DataColumn("Id_acceso"));
-            dt.Columns.Add(new DataColumn("Id_acceso"));
-            dt.Columns.Add(new DataColumn("Id_acceso"));
+            dt.Columns.Add(new DataColumn("Modificacion_usuario"));
+            dt.Columns.Add(new DataColumn("Id_equipo"));
+            dt.Columns.Add(new DataColumn("Rut_usuario_asignado"));
+            dt.Columns.Add(new DataColumn("Rut_usuario_creador"));
             dr["Id_flujo"] = Id_flujo;
             dr["Fecha_implementacion"] = Fecha_implementacion;
             dr["Modificacion_fecha_hora"] = Modificacion_fecha_hora;
             dr["Modificacion_usuario"] = Modificacion_usuario;
             dr["Id_equipo"] = Id_equipo;
             dr["Rut_usuario_asignado"] = Rut_usuario_asignado;
-            dr["Rut_usuario_asignado"] = Rut_usuario_asignado;
+            dr["Rut_usuario_creador"] = Rut_usuario_creador;
             dt.Rows.Add(dr);
             ds.Tables.Add(dt);
             return ds;
@@ -70,14 +70,63 @@ namespace Process.Modelos
                 //Fecha_implementacion
                 try
                 {
-                    Fecha_implementacion = dr["Fecha_implementacion"].();
+                    Fecha_implementacion = DateTime.Parse(dr["Fecha_implementacion"].ToString());
                 }
                 catch (Exception ex)
                 {
-                    Nombre = string.Empty;
+                    Fecha_implementacion = DateTime.Now;
                     string MensajeError = ex.Message;
                 }
-
+                //Fecha_implementacion
+                try
+                {
+                    Modificacion_fecha_hora = DateTime.Parse(dr["Modificacion_fecha_hora"].ToString());
+                }
+                catch (Exception ex)
+                {
+                    Modificacion_fecha_hora = DateTime.Now;
+                    string MensajeError = ex.Message;
+                }
+                //Fecha_implementacion
+                try
+                {
+                    Modificacion_usuario = dr["Modificacion_usuario"].ToString();
+                }
+                catch (Exception ex)
+                {
+                    Modificacion_usuario = string.Empty;
+                    string MensajeError = ex.Message;
+                }
+                //Id_equipo
+                try
+                {
+                    Id_equipo = Int32.Parse(dr["Id_equipo"].ToString());
+                }
+                catch (Exception ex)
+                {
+                    Id_equipo = 0;
+                    string MensajeError = ex.Message;
+                }
+                //Rut_usuario_asignado
+                try
+                {
+                    Rut_usuario_asignado = dr["Rut_usuario_asignado"].ToString();
+                }
+                catch (Exception ex)
+                {
+                    Rut_usuario_asignado = string.Empty;
+                    string MensajeError = ex.Message;
+                }
+                //Rut_usuario_creador
+                try
+                {
+                    Rut_usuario_creador = dr["Rut_usuario_creador"].ToString();
+                }
+                catch (Exception ex)
+                {
+                    Rut_usuario_creador = string.Empty;
+                    string MensajeError = ex.Message;
+                }
             }
         }
 

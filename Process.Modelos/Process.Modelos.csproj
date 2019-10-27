@@ -57,15 +57,25 @@
     <Compile Include="Equipo.cs" />
     <Compile Include="EstadoTarea.cs" />
     <Compile Include="Flujo.cs" />
+    <Compile Include="FlujoTipo.cs" />
+    <Compile Include="FlujoTipoUnidad.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="HistorialTareas.cs" />
     <Compile Include="Permisos.cs" />
+    <Compile Include="Problema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provincia.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="Rol.cs" />
+    <Compile Include="Solucion.cs" />
+    <Compile Include="Tarea.cs" />
+    <Compile Include="TareaTipo.cs" />
+    <Compile Include="TipoProblema.cs" />
+    <Compile Include="TipoSolucion.cs" />
     <Compile Include="Unidad.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuarioEquipo.cs" />
+    <Compile Include="VinculoTarea.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
