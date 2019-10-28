@@ -40,15 +40,15 @@ namespace Process.Servicios
 
                 dynamic dataJson = new ExpandoObject();
                 dynamic datosRespuesta = new ExpandoObject();
-                dynamic _ruta = new ExpandoObject();
-                dynamic _nombre = new ExpandoObject();
-                dynamic _id_historial_tarea = new ExpandoObject();
+                //dynamic _ruta = new ExpandoObject();
+                //dynamic _nombre = new ExpandoObject();
+                //dynamic _id_historial_tarea = new ExpandoObject();
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
-                _ruta = dataJson.RUTA;
-                _nombre = dataJson.NOMBRE;
-                _id_historial_tarea = dataJson.ID_HISTORIAL_TAREA;
+                string _ruta = dataJson.RUTA;
+                string _nombre = dataJson.NOMBRE;
+                int _id_historial_tarea = dataJson.ID_HISTORIAL_TAREA;
 
 
 
