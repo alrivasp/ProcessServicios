@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoNE.cs" />
+    <Compile Include="ArchivoNE.cs" />
     <Compile Include="AutentificacionNE.cs" />
     <Compile Include="CargoNE.cs" />
     <Compile Include="CargosUsuariosNE.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="CuentaNE.cs" />
     <Compile Include="EmpresaNE.cs" />
     <Compile Include="EquipoNE.cs" />
+    <Compile Include="EstadoTareaNE.cs" />
     <Compile Include="FlujoTipoNE.cs" />
     <Compile Include="PermisosNE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

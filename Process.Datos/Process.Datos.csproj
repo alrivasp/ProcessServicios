@@ -56,6 +56,7 @@
     <Compile Include="CuentaDA.cs" />
     <Compile Include="EmpresaDA.cs" />
     <Compile Include="EquipoDA.cs" />
+    <Compile Include="EstadoTareaDA.cs" />
     <Compile Include="FlujoDA.cs" />
     <Compile Include="FlujoTipoDA.cs" />
     <Compile Include="HistorialTareaDA.cs" />

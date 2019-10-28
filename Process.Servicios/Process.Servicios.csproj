@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Process_Acceso.asmx" />
+    <Content Include="Process_Archivo.asmx" />
     <Content Include="Process_Autentificacion.asmx" />
     <Content Include="Process_Cargo.asmx" />
     <Content Include="Process_CargosUsuarios.asmx" />
@@ -95,6 +96,10 @@
   <ItemGroup>
     <Compile Include="Process_Acceso.asmx.cs">
       <DependentUpon>Process_Acceso.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Archivo.asmx.cs">
+      <DependentUpon>Process_Archivo.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Process_Autentificacion.asmx.cs">
