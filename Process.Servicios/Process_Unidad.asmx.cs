@@ -7,6 +7,9 @@ using System.Web.Services;
 using Process.Modelos;
 using Process.Negocios;
 using System.Data;
+using System.Web.Script.Services;
+using Newtonsoft.Json;
+using System.Dynamic;
 
 namespace Process.Servicios
 {
@@ -223,8 +226,42 @@ namespace Process.Servicios
         //////////////////////////////////////
         ////Web Metodos para APP WEB
         //////////////////////////////////////
-        
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerUnidadPorEmpresa_Web(string json)
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+                dynamic dataJson = new ExpandoObject();
+                dynamic data = new ExpandoObject();
+                dynamic datosRespuesta = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                string _rut_empresa = dataJson.rut_empresa;
+
+                retorno = unidadNE.TraerUnidadPorEmpresaSinEntidad(_rut_empresa);
+
+                data.unidades = retorno.Tables[0];
+                datosRespuesta.datos = data;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+
+            }
+
+        }
 
         /// <summary>
         /// CONEXION 

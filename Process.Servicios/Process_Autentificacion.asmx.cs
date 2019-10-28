@@ -7,11 +7,9 @@ using System.Web.Services;
 using Oracle.ManagedDataAccess.Client;
 using Process.Negocios;
 using Process.Modelos;
-using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using Newtonsoft.Json;
 using System.Dynamic;
-using System.IO;
 
 namespace Process.Servicios
 {
