@@ -14,7 +14,7 @@ namespace Process.Datos
     public class HistorialTareaDA
     {
 
-        public int InsertarHistorialTarea(string _descripcion, DateTime _fecha_hora, int _id_estado_tarea, int _id_tarea)
+        public int InsertarHistorialTarea(string _descripcion, int _id_estado_tarea, int _id_tarea)
         {
             OracleCommand cmd = null;
             int respuesta = 0;
@@ -25,8 +25,7 @@ namespace Process.Datos
                 cmd = new OracleCommand(procedure, cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
                 
-                cmd.Parameters.Add("V_DESCRIPCION", OracleDbType.NVarchar2).Value = _descripcion;
-                cmd.Parameters.Add("V_FECHA_HORA", OracleDbType.Date).Value = _fecha_hora;
+                cmd.Parameters.Add("V_DESCRIPCION", OracleDbType.NVarchar2).Value = _descripcion;                
                 cmd.Parameters.Add("V_ID_ESTADO_TAREA", OracleDbType.Int32).Value = _id_estado_tarea;
                 cmd.Parameters.Add("V_ID_TAREA", OracleDbType.Int32).Value = _id_tarea;
 

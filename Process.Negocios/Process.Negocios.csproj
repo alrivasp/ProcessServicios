@@ -57,16 +57,25 @@
     <Compile Include="EmpresaNE.cs" />
     <Compile Include="EquipoNE.cs" />
     <Compile Include="EstadoTareaNE.cs" />
+    <Compile Include="FlujoNE.cs" />
     <Compile Include="FlujoTipoNE.cs" />
+    <Compile Include="HistorialTareaNE.cs" />
     <Compile Include="PermisosNE.cs" />
+    <Compile Include="ProblemaNE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaNE.cs" />
     <Compile Include="RegionNE.cs" />
     <Compile Include="RolNE.cs" />
+    <Compile Include="SolucionNE.cs" />
+    <Compile Include="TareaNE.cs" />
+    <Compile Include="TareaTipoNE.cs" />
+    <Compile Include="TipoProblemaNE.cs" />
+    <Compile Include="TipoSolucionNE.cs" />
     <Compile Include="UnidadNE.cs" />
     <Compile Include="UsuarioEquipoNE.cs" />
     <Compile Include="UsuarioNE.cs" />
     <Compile Include="ValidadoresNE.cs" />
+    <Compile Include="VinculoTareaNE.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

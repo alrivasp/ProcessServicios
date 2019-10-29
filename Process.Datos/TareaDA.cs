@@ -13,7 +13,7 @@ namespace Process.Datos
 {
     public class TareaDA
     {
-        public int InsertarTarea(string _nombre, string _descripcion, DateTime _fecha_inicio, DateTime _fecha_termino, DateTime _modificacion_fecha_hora, 
+        public int InsertarTarea(string _nombre, string _descripcion, DateTime _fecha_inicio, DateTime _fecha_termino,  
                                     string  _modificacion_usuario_cambio, int _id_flujo, int _id_estado_tarea, string _rut_usuario_asignado, string _rut_usuario_creador)
         {
             OracleCommand cmd = null;
@@ -28,8 +28,7 @@ namespace Process.Datos
                 cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _nombre;
                 cmd.Parameters.Add("V_DESCRIPCION", OracleDbType.NVarchar2).Value = _descripcion;
                 cmd.Parameters.Add("V_FECHA_INICIO", OracleDbType.Date).Value = _fecha_inicio;
-                cmd.Parameters.Add("V_FECHA_TERMINO", OracleDbType.Date).Value = _fecha_termino;
-                cmd.Parameters.Add("V_MODIFICACION_FECHA_HORA", OracleDbType.Date).Value = _modificacion_fecha_hora;
+                cmd.Parameters.Add("V_FECHA_TERMINO", OracleDbType.Date).Value = _fecha_termino;                
                 cmd.Parameters.Add("V_MODIFICACION_USUARIO_CAMBIO", OracleDbType.NVarchar2).Value = _modificacion_usuario_cambio;
                 cmd.Parameters.Add("V_ID_FLUJO", OracleDbType.Int32).Value = _id_flujo;
                 cmd.Parameters.Add("V_ID_ESTADO_TAREA", OracleDbType.Int32).Value = _id_estado_tarea;

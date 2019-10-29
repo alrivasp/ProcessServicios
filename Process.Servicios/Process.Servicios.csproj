@@ -82,15 +82,25 @@
     <Content Include="Process_Cuenta.asmx" />
     <Content Include="Process_Empresa.asmx" />
     <Content Include="Process_Equipo.asmx" />
+    <Content Include="Process_EstadoTarea.asmx" />
+    <Content Include="Process_Flujo.asmx" />
     <Content Include="Process_FlujoTipo.asmx" />
+    <Content Include="Process_HistorialTarea.asmx" />
     <Content Include="Process_Permisos.asmx" />
+    <Content Include="Process_Problema.asmx" />
     <Content Include="Process_Provincia.asmx" />
     <Content Include="Process_Region.asmx" />
     <Content Include="Process_Rol.asmx" />
+    <Content Include="Process_Solucion.asmx" />
+    <Content Include="Process_Tarea.asmx" />
+    <Content Include="Process_TareaTipo.asmx" />
+    <Content Include="Process_TipoProblema.asmx" />
+    <Content Include="Process_TipoSolucion.asmx" />
     <Content Include="Process_Unidad.asmx" />
     <Content Include="Process_Usuario.asmx" />
     <Content Include="Process_UsuarioEquipo.asmx" />
     <Content Include="Process_Validadores.asmx" />
+    <Content Include="Process_VinculoTarea.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -130,12 +140,28 @@
       <DependentUpon>Process_Equipo.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Process_EstadoTarea.asmx.cs">
+      <DependentUpon>Process_EstadoTarea.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Flujo.asmx.cs">
+      <DependentUpon>Process_Flujo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Process_FlujoTipo.asmx.cs">
       <DependentUpon>Process_FlujoTipo.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Process_HistorialTarea.asmx.cs">
+      <DependentUpon>Process_HistorialTarea.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Process_Permisos.asmx.cs">
       <DependentUpon>Process_Permisos.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Problema.asmx.cs">
+      <DependentUpon>Process_Problema.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Process_Provincia.asmx.cs">
@@ -148,6 +174,26 @@
     </Compile>
     <Compile Include="Process_Rol.asmx.cs">
       <DependentUpon>Process_Rol.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Solucion.asmx.cs">
+      <DependentUpon>Process_Solucion.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_Tarea.asmx.cs">
+      <DependentUpon>Process_Tarea.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_TareaTipo.asmx.cs">
+      <DependentUpon>Process_TareaTipo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_TipoProblema.asmx.cs">
+      <DependentUpon>Process_TipoProblema.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_TipoSolucion.asmx.cs">
+      <DependentUpon>Process_TipoSolucion.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Process_Unidad.asmx.cs">
@@ -164,6 +210,10 @@
     </Compile>
     <Compile Include="Process_Validadores.asmx.cs">
       <DependentUpon>Process_Validadores.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_VinculoTarea.asmx.cs">
+      <DependentUpon>Process_VinculoTarea.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
