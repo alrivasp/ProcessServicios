@@ -29,5 +29,23 @@ namespace Process.Negocios
             }
 
         }
+
+        public int ActualizarVinculoTarea(int _id_tarea_hijo, int _id_tarea_padre, int _tipo)
+        {
+
+            try
+            {
+                int retorno = 0;
+                retorno = vinculoTareaDA.ActualizarVinculoTarea(_id_tarea_hijo, _id_tarea_padre, _tipo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
     }
 }

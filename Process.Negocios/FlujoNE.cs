@@ -30,5 +30,23 @@ namespace Process.Negocios
             }
 
         }
+
+        public int ActualizarFlujo(int _id_flujo, string _modificacion_usuario, int _id_equipo, string _rut_usuario_equipo)
+        {
+
+            try
+            {
+                int retorno = 0;
+                retorno = flujoDA.ActualizarFlujo(_id_flujo, _modificacion_usuario, _id_equipo, _rut_usuario_equipo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
     }
 }

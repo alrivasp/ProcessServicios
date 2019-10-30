@@ -12,22 +12,6 @@ namespace Process.Negocios
     public class TipoSolucionNE
     {
         private TipoSolucionDA tipoSolucionDA = new TipoSolucionDA();
-        public int InsertarTipoSolucion(string _descripcion)
-        {
-
-            try
-            {
-                int retorno = 0;
-                retorno = tipoSolucionDA.InsertarTipoSolucion(_descripcion);
-                return retorno;
-
-            }
-            catch (Exception)
-            {
-                return -1;
-
-            }
-
-        }
+        
     }
 }

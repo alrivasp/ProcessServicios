@@ -32,7 +32,7 @@ namespace Process.Servicios
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void InsertarArchivo_Web(string json)
+        public void InsertarTarea_Web(string json)
         {
             try
             {
@@ -57,6 +57,49 @@ namespace Process.Servicios
 
                 retorno = tareaNE.InsertarTarea(_nombre, _descripcion, _fecha_inicio, _fecha_termino, _modificacion_usuario_cambio, _id_flujo, _id_estado_tarea, _rut_usuario_asignado, _rut_usuario_creador);                
                                
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ActualizarTarea_Web(string json)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dynamic dataJson = new ExpandoObject();
+                dynamic datosRespuesta = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_tarea = dataJson.ID_TAREA;
+                string _nombre = dataJson.NOMBRE;
+                string _descripcion = dataJson.DESCRIPCION;
+                DateTime _fecha_inicio = dataJson.FECHA_INICIO;
+                DateTime _fecha_termino = dataJson.FECHA_TERMINO;
+                string _modificacion_usuario_cambio = dataJson.MODIFICACION_USUARIO_CAMBIO;
+                int _id_flujo = dataJson.ID_FLUJO;
+                int _id_estado_tarea = dataJson.ID_ESTADO_TAREA;
+                string _rut_usuario_asignado = dataJson.RUT_USUARIO_ASIGNADO;
+                string _rut_usuario_creador = dataJson.RUT_USUARIO_CREADOR;
+
+
+                retorno = tareaNE.ActualizarTarea(_id_tarea, _nombre, _descripcion, _fecha_inicio, _fecha_termino, _modificacion_usuario_cambio, _id_flujo, _id_estado_tarea, _rut_usuario_asignado, _rut_usuario_creador);
+
                 datosRespuesta.datos = retorno;
 
                 string JSONString = string.Empty;

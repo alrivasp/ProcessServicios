@@ -66,6 +66,42 @@ namespace Process.Servicios
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ActualizarVinculoTarea_Web(string json)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dynamic dataJson = new ExpandoObject();
+                dynamic datosRespuesta = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_tarea_hijo = dataJson.ID_TAREA_HIJO;
+                int _id_tarea_padre = dataJson.ID_TAREA_PADRE;
+                int _tipo = dataJson.TIPO;
+
+                retorno = vinculoTareaNE.ActualizarVinculoTarea(_id_tarea_hijo, _id_tarea_padre, _tipo);
+
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+        }
+
         /// <summary>
         /// CONEXION 
         /// </summary>

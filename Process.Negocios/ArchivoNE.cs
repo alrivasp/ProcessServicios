@@ -29,5 +29,23 @@ namespace Process.Negocios
             }
 
         }
+
+        public int ActualizarArchivo(int _id_archivo, string _ruta, string _nombre, int _id_historial_tarea)
+        {
+
+            try
+            {
+                int retorno = 0;
+                retorno = archivoDA.ActualizarArchivo(_id_archivo,_ruta, _nombre, _id_historial_tarea);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
     }
 }

@@ -53,5 +53,44 @@ namespace Process.Datos
             return respuesta;
         }
 
+        public int ActualizarFlujo(int _id_flujo, string _modificacion_usuario, int _id_equipo, string _rut_usuario_equipo)
+        {
+            OracleCommand cmd = null;
+            int respuesta = 0;
+            try
+            {
+                string procedure = "FLUJO_ACTUALIZAR";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_ID_FLUJO", OracleDbType.Int32).Value = _id_flujo;
+                cmd.Parameters.Add("V_MODIFICACION_USUARIO", OracleDbType.NVarchar2).Value = _modificacion_usuario;
+                cmd.Parameters.Add("V_ID_EQUIPO", OracleDbType.Int32).Value = _id_equipo;
+                cmd.Parameters.Add("V_RUT_USUARIO_ASIGNADO", OracleDbType.NVarchar2).Value = _rut_usuario_equipo;
+                
+                OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                cmd.ExecuteNonQuery();
+                object resultado = retorno.Value;
+                respuesta = Int32.Parse(resultado.ToString());
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+                respuesta = -1;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return respuesta;
+        }
+
     }
 }

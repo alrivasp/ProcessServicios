@@ -71,6 +71,43 @@ namespace Process.Servicios
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ActualizarArchivo_Web(string json)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dynamic dataJson = new ExpandoObject();
+                dynamic datosRespuesta = new ExpandoObject();
+                
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_archivo = dataJson.ID_ARCHIVO;
+                string _ruta = dataJson.RUTA;
+                string _nombre = dataJson.NOMBRE;
+                int _id_historial_tarea = dataJson.ID_HISTORIAL_TAREA;
+
+                
+                retorno = archivoNE.ActualizarArchivo(_id_archivo,_ruta, _nombre, _id_historial_tarea);
+                               
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+        }
+
         /// <summary>
         /// CONEXION 
         /// </summary>

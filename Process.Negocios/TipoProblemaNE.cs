@@ -12,22 +12,6 @@ namespace Process.Negocios
     public class TipoProblemaNE
     {
         private TipoProblemaDA tipoProblemaDA = new TipoProblemaDA();
-        public int InsertarTipoProblema(string _descripcion)
-        {
-
-            try
-            {
-                int retorno = 0;
-                retorno = tipoProblemaDA.InsertarTipoProblema(_descripcion);
-                return retorno;
-
-            }
-            catch (Exception)
-            {
-                return -1;
-
-            }
-
-        }
+       
     }
 }

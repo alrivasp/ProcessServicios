@@ -66,6 +66,43 @@ namespace Process.Servicios
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ActualizarTareaTipo_Web(string json)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dynamic dataJson = new ExpandoObject();
+                dynamic datosRespuesta = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_tarea_tipo = dataJson.ID_TAREA_TIPO;
+                string _nombre = dataJson.NOMBRE;
+                string _descripcion = dataJson.DESCRIPCION;
+                int _cantidad_dias = dataJson.CANTIDAD_DIAS;
+                int _id_flujo_tipo = dataJson.ID_FLUJO_TIPO;
+
+                retorno = tareaTipoNE.ActualizarTareaTipo(_id_tarea_tipo, _nombre, _descripcion, _cantidad_dias, _id_flujo_tipo);
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+        }
+
         /// <summary>
         /// CONEXION 
         /// </summary>

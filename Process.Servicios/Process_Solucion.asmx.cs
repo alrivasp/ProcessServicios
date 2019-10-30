@@ -65,6 +65,42 @@ namespace Process.Servicios
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ActualizarSolucion_Web(string json)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dynamic dataJson = new ExpandoObject();
+                dynamic datosRespuesta = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_solucion = dataJson.ID_SOLUCION;
+                string _descripcion = dataJson.DESCRIPCION;
+                int _id_tipo_solucion = dataJson.ID_TIPO_SOLUCION;
+                int _id_problema = dataJson.ID_PROBLEMA;
+
+                retorno = solucionNE.ActualizarSolucion(_id_solucion, _descripcion, _id_tipo_solucion, _id_problema);
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+        }
+
         /// <summary>
         /// CONEXION 
         /// </summary>

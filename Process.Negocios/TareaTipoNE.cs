@@ -29,5 +29,23 @@ namespace Process.Negocios
             }
 
         }
+
+        public int ActualizarTareaTipo(int _id_tarea_tipo, string _nombre, string _descripcion, int _cantidad_dias, int _id_flujo_tipo)
+        {
+
+            try
+            {
+                int retorno = 0;
+                retorno = tareaTipoDA.ActualizarTareaTipo(_id_tarea_tipo, _nombre, _descripcion, _cantidad_dias, _id_flujo_tipo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
     }
 }

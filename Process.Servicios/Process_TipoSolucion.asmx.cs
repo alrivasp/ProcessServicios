@@ -30,38 +30,7 @@ namespace Process.Servicios
         ////Web Metodos para APP WEB
         //////////////////////////////////////
 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void InsertarTipoSolucion_Web(string json)
-        {
-            try
-            {
-                CadenaConexion();
-                int retorno = 0;
-
-                dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();
-
-                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
-
-                string _descripcion = dataJson.DESCRIPCION;
-
-                retorno = tipoSolucionNE.InsertarTipoSolucion(_descripcion);
-
-                datosRespuesta.datos = retorno;
-
-                string JSONString = string.Empty;
-                JSONString = JsonConvert.SerializeObject(datosRespuesta);
-                Context.Response.ContentType = "application/json";
-                Context.Response.Write(JSONString);
-
-            }
-            catch (Exception ex)
-            {
-                Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
-            }
-        }
+       
 
         /// <summary>
         /// CONEXION 
