@@ -48,5 +48,22 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerTodosFlujo()
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = flujoDA.TraerTodosFlujo();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

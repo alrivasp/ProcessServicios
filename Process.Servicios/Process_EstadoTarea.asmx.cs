@@ -23,13 +23,44 @@ namespace Process.Servicios
     // [System.Web.Script.Services.ScriptService]
     public class Process_EstadoTarea : System.Web.Services.WebService
     {
-
+        private EstadoTareaNE estadoTareaNE = new EstadoTareaNE();
 
         //////////////////////////////////////
         ////Web Metodos para APP WEB
         //////////////////////////////////////
 
-       
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosEstadoTarea_Web()
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dynamic dataJson = new ExpandoObject();//Objeto json
+                dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+                dynamic data = new ExpandoObject();
+
+                retorno = estadoTareaNE.TraerTodosEstadoTarea();//se envian variables
+
+                data.estadoTarea = retorno.Tables[0];
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+
+        }
 
         /// <summary>
         /// CONEXION 

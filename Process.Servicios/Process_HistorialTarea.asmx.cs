@@ -66,6 +66,76 @@ namespace Process.Servicios
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ActualizarHistorialTarea_Web(string json)
+        {
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dynamic dataJson = new ExpandoObject();
+                dynamic datosRespuesta = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_historial_tarea = dataJson.ID_HISTORIAL_TAREA;
+                string _descripcion = dataJson.DESCRIPCION;
+                int _id_estado_tarea = dataJson.ID_ESTADO_TAREA;
+                int _id_tarea = dataJson.ID_TAREA;
+
+
+                retorno = historialTareaNE.ActualizarHistorialTarea(_id_historial_tarea, _descripcion, _id_estado_tarea, _id_tarea);
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosHistorialTarea_Web()
+        {
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dynamic dataJson = new ExpandoObject();//Objeto json
+                dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+                dynamic data = new ExpandoObject();
+
+                retorno = historialTareaNE.TraerTodosHistorialTarea();//se envian variables
+
+                data.historialTarea = retorno.Tables[0];
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write("Error : " + ex.Message);
+            }
+
+        }
+
         /// <summary>
         /// CONEXION 
         /// </summary>

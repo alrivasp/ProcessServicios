@@ -13,7 +13,6 @@ namespace Process.Datos
 {
     public class ArchivoDA
     {
-
         public int InsertarArchivo(string _ruta, string _nombre , int _id_historial_tarea)
         {
             OracleCommand cmd = null;
@@ -90,5 +89,45 @@ namespace Process.Datos
 
             return respuesta;
         }
+      
+        public DataSet TraerTodosArchivos()
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "ARCHIVO_TRAER_TODOS";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                OracleParameter retorno = cmd.Parameters.Add("C_ARCHIVOS", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
+
+
     }
 }

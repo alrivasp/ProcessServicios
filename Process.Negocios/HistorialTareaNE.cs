@@ -31,5 +31,40 @@ namespace Process.Negocios
 
         }
 
+        public int ActualizarHistorialTarea(int _id_historial_tarea, string _descripcion, int _id_estado_tarea, int _id_tarea)
+        {
+
+            try
+            {
+                int retorno = 0;
+                retorno = historialTareaDA.ActualizarHistorialTarea(_id_historial_tarea, _descripcion, _id_estado_tarea, _id_tarea);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
+
+        public DataSet TraerTodosHistorialTarea()
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = historialTareaDA.TraerTodosHistorialTarea();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
     }
 }

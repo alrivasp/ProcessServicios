@@ -12,6 +12,23 @@ namespace Process.Negocios
     public class TipoSolucionNE
     {
         private TipoSolucionDA tipoSolucionDA = new TipoSolucionDA();
-        
+
+        public DataSet TraerTodosTipoSolucion()
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = tipoSolucionDA.TraerTodosTipoSolucion();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
     }
 }

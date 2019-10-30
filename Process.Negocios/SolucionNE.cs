@@ -48,5 +48,22 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerTodosSolucion()
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = solucionDA.TraerTodosSolucion();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

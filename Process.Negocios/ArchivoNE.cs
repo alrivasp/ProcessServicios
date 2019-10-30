@@ -47,5 +47,22 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerTodosArchivos()
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = archivoDA.TraerTodosArchivos();
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }
