@@ -9,12 +9,12 @@ namespace Process.Modelos
 {
     public class UsuarioEquipo
     {
-        private int _rut_usuario;
-        private int _id_equipo;
+        private string _rut_usuario;
+        private string _id_equipo;
         private int _responsable;
 
-        public int Rut_usuario { get => _rut_usuario; set => _rut_usuario = value; }
-        public int Id_equipo { get => _id_equipo; set => _id_equipo = value; }
+        public string Rut_usuario { get => _rut_usuario; set => _rut_usuario = value; }
+        public string Id_equipo { get => _id_equipo; set => _id_equipo = value; }
         public int Responsable { get => _responsable; set => _responsable = value; }
 
         public DataSet toDataSet()
@@ -44,21 +44,21 @@ namespace Process.Modelos
                 //Rut_usuario
                 try
                 {
-                    Rut_usuario = Int32.Parse(dr["Rut_usuario"].ToString());
+                    Rut_usuario = dr["Rut_usuario"].ToString();
                 }
                 catch (Exception ex)
                 {
-                    Rut_usuario = 0;
+                    Rut_usuario = string.Empty;
                     string MensajeError = ex.Message;
                 }
                 //Id_equipo
                 try
                 {
-                    Id_equipo = Int32.Parse(dr["Id_equipo"].ToString());
+                    Id_equipo = dr["Id_equipo"].ToString();
                 }
                 catch (Exception ex)
                 {
-                    Id_equipo = 0;
+                    Id_equipo = string.Empty;
                     string MensajeError = ex.Message;
                 }
                 //Responsable
