@@ -48,12 +48,30 @@ namespace Process.Negocios
 
         }
 
-        public DataSet TraerTodosTareaTipo()
+        public int EliminarTareaTipo(int _id_tipo_flujo)
+        {
+
+            try
+            {
+                int retorno = 0;
+                retorno = tareaTipoDA.EliminarTareaTipo(_id_tipo_flujo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                return -1;
+
+            }
+
+        }
+
+        public DataSet TraerTodosTareaTipo(string _id_tipo_flujo)
         {
             try
             {
                 DataSet retorno = new DataSet();
-                retorno = tareaTipoDA.TraerTodosTareaTipo();
+                retorno = tareaTipoDA.TraerTodosTareaTipo(_id_tipo_flujo);
                 return retorno;
 
             }

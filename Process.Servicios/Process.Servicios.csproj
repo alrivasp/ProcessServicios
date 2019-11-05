@@ -85,6 +85,7 @@
     <Content Include="Process_EstadoTarea.asmx" />
     <Content Include="Process_Flujo.asmx" />
     <Content Include="Process_FlujoTipo.asmx" />
+    <Content Include="Process_FlujoTipoUnidad.asmx" />
     <Content Include="Process_HistorialTarea.asmx" />
     <Content Include="Process_Permisos.asmx" />
     <Content Include="Process_Problema.asmx" />
@@ -150,6 +151,10 @@
     </Compile>
     <Compile Include="Process_FlujoTipo.asmx.cs">
       <DependentUpon>Process_FlujoTipo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Process_FlujoTipoUnidad.asmx.cs">
+      <DependentUpon>Process_FlujoTipoUnidad.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Process_HistorialTarea.asmx.cs">

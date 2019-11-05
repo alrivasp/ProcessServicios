@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -10,62 +9,22 @@ using Process.Modelos;
 using System.Web.Script.Services;
 using Newtonsoft.Json;
 using System.Dynamic;
+using System.Data;
 
 namespace Process.Servicios
 {
     /// <summary>
-    /// Descripción breve de Process_Autentificacion
+    /// Descripción breve de Process_FlujoTipoUnidad
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // Para permitir que se llame a este servicio web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente. 
     // [System.Web.Script.Services.ScriptService]
-    public class Process_Autentificacion : System.Web.Services.WebService
+    public class Process_FlujoTipoUnidad : System.Web.Services.WebService
     {
 
-        private AutentificacionNE autentificacionNE = new AutentificacionNE();
-
-        //////////////////////////////////////
-        ////Web Metodos para APP de Escritorio
-        //////////////////////////////////////
-
-        [WebMethod]
-        public int Login_Escritorio(string _rut_usuario, string _contrasena)
-        {
-            try
-            {
-                CadenaConexion();
-                int retorno = 0;
-                retorno = autentificacionNE.Login(_rut_usuario, _contrasena);
-                return retorno;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-           
-        }
-
-        [WebMethod]
-        public DataSet TraerSesionUsuario_Escritorio(string _rut_usuario)
-        {
-            try
-            {
-                CadenaConexion();
-                DataSet retorno = new DataSet();
-                string _rut_empresa = string.Empty;
-                retorno = autentificacionNE.TraerSesionUsuario(_rut_usuario, _rut_empresa);
-                return retorno;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-
-        }
+        private FlujoTipoUnidadNE flujoTipoUnidadNE = new FlujoTipoUnidadNE();
 
         //////////////////////////////////////
         ////Web Metodos para APP WEB
@@ -73,29 +32,33 @@ namespace Process.Servicios
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void Login_Web(string json)
+        public void InsertarFlujoTipoUnidad_Web(string json)
         {
-            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic datosRespuesta = new ExpandoObject();
+
             try
             {
                 CadenaConexion();
                 int retorno = 0;
 
-                dynamic dataJson = new ExpandoObject(); //Objeto json
+                dynamic dataJson = new ExpandoObject();
+                dynamic flujosTipoUnidades = new ExpandoObject();
 
-                dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
-                string _rut_usuario = dataJson.rut_usuario;
-                string _contrasena = dataJson.contrasena;
+                flujosTipoUnidades = dataJson.flujosTipoUnidades;
 
-                retorno = autentificacionNE.Login(_rut_usuario, _contrasena);//se envian variables
+                foreach (var item in flujosTipoUnidades)
+                {
+                    retorno = flujoTipoUnidadNE.InsertarFlujoTipoUnidad(Convert.ToInt32(item["ID_UNIDAD"]), Convert.ToInt32(item["ID_FLUJO_TIPO"]));
+                }
 
-                datosRespuesta.datos = retorno; //se pasa respuesta dataset a objeto respuesta
+                datosRespuesta.datos = retorno;
 
                 string JSONString = string.Empty;
-                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write(JSONString);//se responde método
+                Context.Response.Write(JSONString);
 
             }
             catch (Exception ex)
@@ -109,40 +72,34 @@ namespace Process.Servicios
                 Context.Response.ContentType = "application/json";
                 Context.Response.Write(JSONString);
             }
-
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void TraerSesionUsuario_Web(string json)
+        public void EliminarFlujoTipoUnidad_Web(string json)
         {
-            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic datosRespuesta = new ExpandoObject();
+
             try
             {
                 CadenaConexion();
-                DataSet retornoSesion = new DataSet();
-                DataSet retornoPermisos = new DataSet();
+                int retorno = 0;
 
-                dynamic dataJson = new ExpandoObject();//Objeto json
-                dynamic data = new ExpandoObject();
+                dynamic dataJson = new ExpandoObject();
+                dynamic flujosTipoUnidades = new ExpandoObject();
 
-                dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
-                string _rut_usuario = dataJson.rut_usuario;
-                string _rut_empresa = dataJson.rut_empresa;
+                int _id_flujo_tipo = dataJson.id_flujo_tipo;
 
-                retornoSesion = autentificacionNE.TraerSesionUsuario(_rut_usuario, _rut_empresa);//se envian variables
-                retornoPermisos = autentificacionNE.TraerPermisosUsuario(_rut_usuario, _rut_empresa);
+                retorno = flujoTipoUnidadNE.EliminarFlujoTipoUnidad(_id_flujo_tipo);
 
-                data.sesion = retornoSesion.Tables[0];
-                data.permisos = retornoPermisos.Tables[0];
-
-                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+                datosRespuesta.datos = retorno;
 
                 string JSONString = string.Empty;
-                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write(JSONString);//se responde método
+                Context.Response.Write(JSONString);
 
             }
             catch (Exception ex)
@@ -156,29 +113,36 @@ namespace Process.Servicios
                 Context.Response.ContentType = "application/json";
                 Context.Response.Write(JSONString);
             }
-
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void TraerEmpresasUsuario_Web(string json)
+        public void TraerFlujoTipoUnidades_Web(string json)
         {
-            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic datosRespuesta = new ExpandoObject();
             try
             {
                 CadenaConexion();
-                DataSet retornoEmpresas = new DataSet();
+                DataSet retornoFlujoTipoUnidades = new DataSet();
 
-                dynamic dataJson = new ExpandoObject();//Objeto json
+                dynamic dataJson = new ExpandoObject();
+
                 dynamic data = new ExpandoObject();
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
 
-                string _rut_usuario = dataJson.rut_usuario;
+                string _id_tipo_flujo = dataJson.id_flujo_tipo;
 
-                retornoEmpresas = autentificacionNE.TraerEmpresasUsuario(_rut_usuario);//se envian variables
+                retornoFlujoTipoUnidades = flujoTipoUnidadNE.TraerFlujoTipoUnidades(_id_tipo_flujo);//se envian variables
 
-                data.empresas = retornoEmpresas.Tables[0];
+                if (retornoFlujoTipoUnidades.Tables.Count > 0)
+                {
+                    data.flujoTipoUnidades = retornoFlujoTipoUnidades.Tables[0];
+                }
+                else
+                {
+                    data.flujoTipoUnidades = null;
+                }
 
                 datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
 

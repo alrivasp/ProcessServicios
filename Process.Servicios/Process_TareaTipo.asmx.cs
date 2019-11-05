@@ -34,22 +34,27 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void InsertarTareaTipo_Web(string json)
         {
+            dynamic datosRespuesta = new ExpandoObject();
             try
             {
                 CadenaConexion();
                 int retorno = 0;
 
                 dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();
+                dynamic tareasTipo = new ExpandoObject();
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
-                string _nombre = dataJson.NOMBRE;
-                string _descripcion = dataJson.DESCRIPCION;
-                int _cantidad_dias = dataJson.CANTIDAD_DIAS;
-                int _id_flujo_tipo = dataJson.ID_FLUJO_TIPO;
+                tareasTipo = dataJson.tareasTipo;
 
-                retorno = tareaTipoNE.InsertarTareaTipo(_nombre, _descripcion, _cantidad_dias, _id_flujo_tipo);
+                foreach (var item in tareasTipo)
+                {
+                    retorno = tareaTipoNE.InsertarTareaTipo(
+                        Convert.ToString(item["NOMBRE"]),
+                        Convert.ToString(item["DESCRIPCION"]),
+                        Convert.ToInt32(item["CANTIDAD_DIAS"]),
+                        Convert.ToInt32(item["ID_FLUJO_TIPO"]));
+                }
                 
                 datosRespuesta.datos = retorno;
 
@@ -61,8 +66,14 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
         }
 
@@ -105,20 +116,72 @@ namespace Process.Servicios
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void TraerTodosTareaTipo_Web()
+        public void EliminarTareaTipo_Web(string json)
         {
+            dynamic datosRespuesta = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dynamic dataJson = new ExpandoObject();
+                dynamic flujosTipoUnidades = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_flujo_tipo = dataJson.id_flujo_tipo;
+
+                retorno = tareaTipoNE.EliminarTareaTipo(_id_flujo_tipo);
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosTareaTipo_Web(string json)
+        {
+            dynamic datosRespuesta = new ExpandoObject();
             try
             {
                 CadenaConexion();
                 DataSet retorno = new DataSet();
 
                 dynamic dataJson = new ExpandoObject();//Objeto json
-                dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
                 dynamic data = new ExpandoObject();
 
-                retorno = tareaTipoNE.TraerTodosTareaTipo();//se envian variables
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
-                data.tareaTipo = retorno.Tables[0];
+                string _id_tipo_flujo = dataJson.id_flujo_tipo;
+
+                retorno = tareaTipoNE.TraerTodosTareaTipo(_id_tipo_flujo);//se envian variables
+
+                if (retorno.Tables.Count > 0)
+                {
+                    data.tareasTipo = retorno.Tables[0];
+                }
+                else
+                {
+                    data.tareasTipo = null;
+                }
 
                 datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
 
@@ -130,8 +193,14 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
 
         }

@@ -59,28 +59,38 @@ namespace Process.Datos
             return respuesta;
         }
 
-        public int InsertarFlujoTipoUnidad(int _id_unidad, int _id_tipo_flujo)
+        public int ActualizarFlujoTipo(string _json)
         {
             OracleCommand cmd = null;
             int respuesta = 0;
             try
             {
-                string procedure = "FLUJO_TIPO_UNIDAD_INSERTAR";
-                OracleConnection cnx = Global.CadenaConexionGlobal;
-                cmd = new OracleCommand(procedure, cnx);
-                cmd.CommandType = CommandType.StoredProcedure;
+                if (_json != null)
+                {
+                    dynamic dataJson = new ExpandoObject();
+                    dataJson = JsonConvert.DeserializeObject<dynamic>(_json);
 
-                cmd.Parameters.Add("V_ID_UNIDAD", OracleDbType.Int32).Value = _id_unidad;
-                cmd.Parameters.Add("V_ID_TIPO_FLUJO", OracleDbType.Int32).Value = _id_tipo_flujo;
+                    string procedure = "FLUJO_TIPO_ACTUALIZAR";
+                    OracleConnection cnx = Global.CadenaConexionGlobal;
+                    cmd = new OracleCommand(procedure, cnx);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
-                retorno.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("V_ID_FLUJO_TIPO", OracleDbType.NVarchar2).Value = dataJson.ID_FLUJO_TIPO;
+                    cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = dataJson.NOMBRE;
+                    cmd.Parameters.Add("V_DESCRIPCION", OracleDbType.NVarchar2).Value = dataJson.DESCRIPCION;
+                    cmd.Parameters.Add("V_ESTADO", OracleDbType.Char).Value = dataJson.ESTADO;
+                    cmd.Parameters.Add("V_USUARIO", OracleDbType.NVarchar2).Value = dataJson.USUARIO;
 
-                cmd.Connection.Open();
+                    OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
+                    retorno.Direction = ParameterDirection.Output;
 
-                cmd.ExecuteNonQuery();
-                object resultado = retorno.Value;
-                respuesta = Int32.Parse(resultado.ToString());
+                    cmd.Connection.Open();
+
+                    cmd.ExecuteNonQuery();
+                    object resultado = retorno.Value;
+                    respuesta = Int32.Parse(resultado.ToString());
+
+                }
 
             }
             catch (Exception pe)
@@ -95,6 +105,7 @@ namespace Process.Datos
 
             return respuesta;
         }
+
 
         public DataSet TraerTodosFlujosTipo(string _rut_empresa)
         {

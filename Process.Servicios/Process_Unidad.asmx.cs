@@ -231,13 +231,13 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void TraerUnidadPorEmpresa_Web(string json)
         {
+            dynamic datosRespuesta = new ExpandoObject();
             try
             {
                 CadenaConexion();
                 DataSet retorno = new DataSet();
                 dynamic dataJson = new ExpandoObject();
                 dynamic data = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
@@ -245,7 +245,15 @@ namespace Process.Servicios
 
                 retorno = unidadNE.TraerUnidadPorEmpresaSinEntidad(_rut_empresa);
 
-                data.unidades = retorno.Tables[0];
+                if(retorno.Tables.Count > 0)
+                {
+                    data.unidades = retorno.Tables[0];
+                }
+                else
+                {
+                    data.unidades = null;
+                }
+
                 datosRespuesta.datos = data;
 
                 string JSONString = string.Empty;
@@ -256,8 +264,14 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
 
             }
 

@@ -59,6 +59,7 @@
     <Compile Include="EstadoTareaDA.cs" />
     <Compile Include="FlujoDA.cs" />
     <Compile Include="FlujoTipoDA.cs" />
+    <Compile Include="FlujoTipoUnidadDA.cs" />
     <Compile Include="HistorialTareaDA.cs" />
     <Compile Include="PermisosDA.cs" />
     <Compile Include="ProblemaDA.cs" />

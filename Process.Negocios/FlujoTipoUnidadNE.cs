@@ -1,25 +1,24 @@
-﻿using System;
+﻿using Process.Datos;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Process.Datos;
-using Process.Modelos;
 
 namespace Process.Negocios
 {
-    public class FlujoTipoNE
+    public class FlujoTipoUnidadNE
     {
-        private FlujoTipoDA flujoTipoDA = new FlujoTipoDA();
+        private FlujoTipoUnidadDA flujoTipoUnidadDA = new FlujoTipoUnidadDA();
 
-        public int InsertarFlujoTipo(string _json)
+        public int InsertarFlujoTipoUnidad(int _id_unidad, int _id_tipo_flujo)
         {
 
             try
             {
                 int retorno = 0;
-                retorno = flujoTipoDA.InsertarFlujoTipo(_json);
+                retorno = flujoTipoUnidadDA.InsertarFlujoTipoUnidad(_id_unidad, _id_tipo_flujo);
                 return retorno;
 
             }
@@ -31,13 +30,13 @@ namespace Process.Negocios
 
         }
 
-        public int ActualizarFlujoTipo(string _json)
+        public int EliminarFlujoTipoUnidad(int _id_tipo_flujo)
         {
 
             try
             {
                 int retorno = 0;
-                retorno = flujoTipoDA.ActualizarFlujoTipo(_json);
+                retorno = flujoTipoUnidadDA.EliminarFlujoTipoUnidad(_id_tipo_flujo);
                 return retorno;
 
             }
@@ -49,13 +48,12 @@ namespace Process.Negocios
 
         }
 
-
-        public DataSet TraerTodosFlujosTipo(string _rut_empresa)
+        public DataSet TraerFlujoTipoUnidades(string _id_tipo_flujo)
         {
             try
             {
                 DataSet retorno = new DataSet();
-                retorno = flujoTipoDA.TraerTodosFlujosTipo(_rut_empresa);
+                retorno = flujoTipoUnidadDA.TraerFlujoTipoUnidades(_id_tipo_flujo);
                 return retorno;
 
             }
