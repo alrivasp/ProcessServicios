@@ -48,8 +48,9 @@ namespace Process.Servicios
                 int _id_equipo = dataJson.ID_EQUIPO;
                 string _rut_usuario_equipo = dataJson.RUT_USUARIO_EQUIPO;
                 string _rut_usuario_creador = dataJson.RUT_USUARIO_CREADOR;
+                string _nombre = dataJson.NOMBRE;
 
-                retorno = flujoNE.InsertarFlujo(_modificacion_usuario, _id_equipo, _rut_usuario_equipo, _rut_usuario_creador);
+                retorno = flujoNE.InsertarFlujo(_modificacion_usuario, _id_equipo, _rut_usuario_equipo, _rut_usuario_creador, _nombre);
 
                 datosRespuesta.datos = retorno;
 
@@ -84,9 +85,10 @@ namespace Process.Servicios
                 string _modificacion_usuario = dataJson.MODIFICACION_USUARIO;
                 int _id_equipo = dataJson.ID_EQUIPO;
                 string _rut_usuario_equipo = dataJson.RUT_USUARIO_EQUIPO;
-                
+                string _nombre = dataJson.NOMBRE;
 
-                retorno = flujoNE.ActualizarFlujo(_id_flujo,_modificacion_usuario, _id_equipo, _rut_usuario_equipo);
+
+                retorno = flujoNE.ActualizarFlujo(_id_flujo,_modificacion_usuario, _id_equipo, _rut_usuario_equipo, _nombre);
 
                 datosRespuesta.datos = retorno;
 

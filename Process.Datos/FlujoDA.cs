@@ -14,7 +14,7 @@ namespace Process.Datos
     public class FlujoDA
     {
 
-        public int InsertarFlujo(string _modificacion_usuario, int _id_equipo, string _rut_usuario_equipo, string _rut_usuario_creador)
+        public int InsertarFlujo(string _modificacion_usuario, int _id_equipo, string _rut_usuario_equipo, string _rut_usuario_creador, string _nombre)
         {
             OracleCommand cmd = null;
             int respuesta = 0;
@@ -29,6 +29,7 @@ namespace Process.Datos
                 cmd.Parameters.Add("V_ID_EQUIPO", OracleDbType.Int32).Value = _id_equipo;
                 cmd.Parameters.Add("V_RUT_USUARIO_ASIGNADO", OracleDbType.NVarchar2).Value = _rut_usuario_equipo;
                 cmd.Parameters.Add("V_RUT_USUARIO_CREADOR", OracleDbType.NVarchar2).Value = _rut_usuario_creador;
+                cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _nombre;
 
                 OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
                 retorno.Direction = ParameterDirection.Output;
@@ -53,7 +54,7 @@ namespace Process.Datos
             return respuesta;
         }
 
-        public int ActualizarFlujo(int _id_flujo, string _modificacion_usuario, int _id_equipo, string _rut_usuario_equipo)
+        public int ActualizarFlujo(int _id_flujo, string _modificacion_usuario, int _id_equipo, string _rut_usuario_equipo, string _nombre)
         {
             OracleCommand cmd = null;
             int respuesta = 0;
@@ -68,7 +69,8 @@ namespace Process.Datos
                 cmd.Parameters.Add("V_MODIFICACION_USUARIO", OracleDbType.NVarchar2).Value = _modificacion_usuario;
                 cmd.Parameters.Add("V_ID_EQUIPO", OracleDbType.Int32).Value = _id_equipo;
                 cmd.Parameters.Add("V_RUT_USUARIO_ASIGNADO", OracleDbType.NVarchar2).Value = _rut_usuario_equipo;
-                
+                cmd.Parameters.Add("V_NOMBRE", OracleDbType.NVarchar2).Value = _nombre;
+
                 OracleParameter retorno = cmd.Parameters.Add("V_RESULTADO", OracleDbType.Int32);
                 retorno.Direction = ParameterDirection.Output;
 

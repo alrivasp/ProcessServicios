@@ -16,6 +16,7 @@ namespace Process.Modelos
         private int _id_equipo;
         private string _rut_usuario_asignado;
         private string _rut_usuario_creador;
+        private string _nombre;
 
         public int Id_flujo { get => _id_flujo; set => _id_flujo = value; }
         public DateTime Fecha_implementacion { get => _fecha_implementacion; set => _fecha_implementacion = value; }
@@ -24,6 +25,7 @@ namespace Process.Modelos
         public int Id_equipo { get => _id_equipo; set => _id_equipo = value; }
         public string Rut_usuario_asignado { get => _rut_usuario_asignado; set => _rut_usuario_asignado = value; }
         public string Rut_usuario_creador { get => _rut_usuario_creador; set => _rut_usuario_creador = value; }
+        public string Nombre { get => _rut_usuario_creador; set => _rut_usuario_creador = value; }
 
 
         public DataSet toDataSet()
@@ -39,6 +41,7 @@ namespace Process.Modelos
             dt.Columns.Add(new DataColumn("Id_equipo"));
             dt.Columns.Add(new DataColumn("Rut_usuario_asignado"));
             dt.Columns.Add(new DataColumn("Rut_usuario_creador"));
+            dt.Columns.Add(new DataColumn("Nombre"));
             dr["Id_flujo"] = Id_flujo;
             dr["Fecha_implementacion"] = Fecha_implementacion;
             dr["Modificacion_fecha_hora"] = Modificacion_fecha_hora;
@@ -46,6 +49,7 @@ namespace Process.Modelos
             dr["Id_equipo"] = Id_equipo;
             dr["Rut_usuario_asignado"] = Rut_usuario_asignado;
             dr["Rut_usuario_creador"] = Rut_usuario_creador;
+            dr["Nombre"] = Nombre;
             dt.Rows.Add(dr);
             ds.Tables.Add(dt);
             return ds;
@@ -125,6 +129,16 @@ namespace Process.Modelos
                 catch (Exception ex)
                 {
                     Rut_usuario_creador = string.Empty;
+                    string MensajeError = ex.Message;
+                }
+                //Nombre
+                try
+                {
+                    Nombre = dr["Nombre"].ToString();
+                }
+                catch (Exception ex)
+                {
+                    Nombre = string.Empty;
                     string MensajeError = ex.Message;
                 }
             }
