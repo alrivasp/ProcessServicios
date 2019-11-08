@@ -75,6 +75,7 @@
     <Compile Include="UnidadNE.cs" />
     <Compile Include="UsuarioEquipoNE.cs" />
     <Compile Include="UsuarioNE.cs" />
+    <Compile Include="ProcesoVerificacionNE.cs" />
     <Compile Include="ValidadoresNE.cs" />
     <Compile Include="VinculoTareaNE.cs" />
   </ItemGroup>

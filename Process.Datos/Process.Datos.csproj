@@ -63,6 +63,7 @@
     <Compile Include="HistorialTareaDA.cs" />
     <Compile Include="PermisosDA.cs" />
     <Compile Include="ProblemaDA.cs" />
+    <Compile Include="ProcesoVerificacionDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaDA.cs" />
     <Compile Include="RegionDA.cs" />
