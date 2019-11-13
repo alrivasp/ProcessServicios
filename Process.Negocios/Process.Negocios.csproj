@@ -61,6 +61,7 @@
     <Compile Include="FlujoTipoNE.cs" />
     <Compile Include="FlujoTipoUnidadNE.cs" />
     <Compile Include="HistorialTareaNE.cs" />
+    <Compile Include="NotificacionNE.cs" />
     <Compile Include="PermisosNE.cs" />
     <Compile Include="ProblemaNE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
