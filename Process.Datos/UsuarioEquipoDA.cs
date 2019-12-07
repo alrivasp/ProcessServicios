@@ -205,5 +205,45 @@ namespace Process.Datos
 
             return respuesta;
         }
+
+        public DataSet TraerUsuariosEquipo(int _id_equipo)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "USUARIO_EQUIPO_TRAER_USUARIOS";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_ID_EQUIPO", OracleDbType.Int32).Value = _id_equipo;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_USUARIO_EQUIPO ", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
     }
 }

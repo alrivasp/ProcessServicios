@@ -34,13 +34,13 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void InsertarHistorialTarea_Web(string json)
         {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-
-                dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();                
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
@@ -61,8 +61,14 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
         }
 

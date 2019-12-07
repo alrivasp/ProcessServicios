@@ -174,13 +174,13 @@ namespace Process.Servicios
 
                 retorno = tareaTipoNE.TraerTodosTareaTipo(_id_tipo_flujo);//se envian variables
 
-                if (retorno.Tables.Count > 0)
+                if (retorno != null && retorno.Tables.Count > 0)
                 {
                     data.tareasTipo = retorno.Tables[0];
                 }
                 else
                 {
-                    data.tareasTipo = null;
+                    data.tareasTipo = retorno;
                 }
 
                 datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta

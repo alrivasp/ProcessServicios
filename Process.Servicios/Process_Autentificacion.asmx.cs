@@ -100,14 +100,8 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
-                dynamic dataError = new ExpandoObject();
-                dataError.error = ex.Message;
-                datosRespuesta.datos = dataError;
-
-                string JSONString = string.Empty;
-                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write(JSONString);
+                Context.Response.Write(ex.Message);
             }
 
         }
@@ -122,6 +116,7 @@ namespace Process.Servicios
                 CadenaConexion();
                 DataSet retornoSesion = new DataSet();
                 DataSet retornoPermisos = new DataSet();
+                DataSet retornoEquipos = new DataSet();
 
                 dynamic dataJson = new ExpandoObject();//Objeto json
                 dynamic data = new ExpandoObject();
@@ -133,9 +128,11 @@ namespace Process.Servicios
 
                 retornoSesion = autentificacionNE.TraerSesionUsuario(_rut_usuario, _rut_empresa);//se envian variables
                 retornoPermisos = autentificacionNE.TraerPermisosUsuario(_rut_usuario, _rut_empresa);
+                retornoEquipos = autentificacionNE.TraerEquiposUsuario(_rut_usuario, _rut_empresa);
 
                 data.sesion = retornoSesion.Tables[0];
                 data.permisos = retornoPermisos.Tables[0];
+                data.equipos = retornoEquipos.Tables[0];
 
                 datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
 
@@ -147,14 +144,8 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
-                dynamic dataError = new ExpandoObject();
-                dataError.error = ex.Message;
-                datosRespuesta.datos = dataError;
-
-                string JSONString = string.Empty;
-                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write(JSONString);
+                Context.Response.Write(ex.Message);
             }
 
         }
@@ -198,6 +189,43 @@ namespace Process.Servicios
                 JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
                 Context.Response.Write(JSONString);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerFechaActual_Web(string json)
+        {
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            try
+            {
+                CadenaConexion();
+                DataSet retornoEmpresas = new DataSet();
+
+                dynamic dataJson = new ExpandoObject();//Objeto json
+                dynamic data = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
+
+                string _rut_empresa = dataJson.rut_empresa;
+
+                retornoEmpresas = autentificacionNE.TraerFechaActual(_rut_empresa);//se envian variables
+
+                data.fecha_actual = retornoEmpresas.Tables[0];
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(ex.Message);
             }
 
         }

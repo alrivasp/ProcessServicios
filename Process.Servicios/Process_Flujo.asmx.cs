@@ -34,23 +34,21 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void InsertarFlujo_Web(string json)
         {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+
             try
             {
                 CadenaConexion();
-                int retorno = 0;
-
-                dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();               
+                int retorno = 0;      
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
-                string _modificacion_usuario = dataJson.MODIFICACION_USUARIO;
                 int _id_equipo = dataJson.ID_EQUIPO;
-                string _rut_usuario_equipo = dataJson.RUT_USUARIO_EQUIPO;
                 string _rut_usuario_creador = dataJson.RUT_USUARIO_CREADOR;
                 string _nombre = dataJson.NOMBRE;
 
-                retorno = flujoNE.InsertarFlujo(_modificacion_usuario, _id_equipo, _rut_usuario_equipo, _rut_usuario_creador, _nombre);
+                retorno = flujoNE.InsertarFlujo(_id_equipo, _rut_usuario_creador, _nombre);
 
                 datosRespuesta.datos = retorno;
 
@@ -62,8 +60,14 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
         }
 
@@ -71,24 +75,22 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void ActualizarFlujo_Web(string json)
         {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-
-                dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
                 int _id_flujo = dataJson.ID_FLUJO;
                 string _modificacion_usuario = dataJson.MODIFICACION_USUARIO;
                 int _id_equipo = dataJson.ID_EQUIPO;
-                string _rut_usuario_equipo = dataJson.RUT_USUARIO_EQUIPO;
                 string _nombre = dataJson.NOMBRE;
 
-
-                retorno = flujoNE.ActualizarFlujo(_id_flujo,_modificacion_usuario, _id_equipo, _rut_usuario_equipo, _nombre);
+                retorno = flujoNE.ActualizarFlujo(_id_flujo,_modificacion_usuario, _id_equipo, _nombre);
 
                 datosRespuesta.datos = retorno;
 
@@ -100,8 +102,56 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ImplementarFlujo_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_flujo = dataJson.ID_FLUJO;
+                string _modificacion_usuario = dataJson.MODIFICACION_USUARIO;
+                int _id_equipo = dataJson.ID_EQUIPO;
+                string _nombre = dataJson.NOMBRE;
+
+                retorno = flujoNE.ImplementarFlujo(_id_flujo, _modificacion_usuario, _id_equipo, _nombre);
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
             }
         }
 
@@ -134,6 +184,109 @@ namespace Process.Servicios
             {
                 Context.Response.ContentType = "application/json";
                 Context.Response.Write("Error : " + ex.Message);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosFlujoUsuario_Web(string json)
+        {
+            dynamic datosRespuesta = new ExpandoObject();
+            try
+            {
+                CadenaConexion();
+                DataSet retornoFlujos = new DataSet();
+
+                dynamic dataJson = new ExpandoObject();
+
+                dynamic data = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
+
+                string _rut_usuario = dataJson.rut_usuario;
+                string _rut_empresa = dataJson.rut_empresa;
+
+                retornoFlujos = flujoNE.TraerTodosFlujoUsuario(_rut_usuario, _rut_empresa);//se envian variables
+
+                if (retornoFlujos != null && retornoFlujos.Tables.Count > 0)
+                {
+                    data.flujos = retornoFlujos.Tables[0];
+                }
+                else
+                {
+                    data.flujos = retornoFlujos;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerFlujo_Web(string json)
+        {
+            dynamic datosRespuesta = new ExpandoObject();
+            try
+            {
+                CadenaConexion();
+                DataSet retornoFlujos = new DataSet();
+
+                dynamic dataJson = new ExpandoObject();
+
+                dynamic data = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
+
+                int _id_flujo = dataJson.id_flujo;
+
+                retornoFlujos = flujoNE.TraerFlujo(_id_flujo);//se envian variables
+
+                if (retornoFlujos != null && retornoFlujos.Tables.Count > 0)
+                {
+                    data.flujos = retornoFlujos.Tables[0];
+                }
+                else
+                {
+                    data.flujos = retornoFlujos;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
             }
 
         }

@@ -66,5 +66,22 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerTodosTareaFlujo(int _id_flujo, string _rut_empresa)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = tareaDA.TraerTodosTareaFlujo(_id_flujo, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

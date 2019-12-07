@@ -34,13 +34,13 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void InsertarTarea_Web(string json)
         {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-
-                dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();
                 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
@@ -67,8 +67,14 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
         }
 
@@ -76,13 +82,13 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void ActualizarTarea_Web(string json)
         {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+
             try
             {
                 CadenaConexion();
                 int retorno = 0;
-
-                dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
@@ -110,8 +116,14 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
         }
 
@@ -144,6 +156,57 @@ namespace Process.Servicios
             {
                 Context.Response.ContentType = "application/json";
                 Context.Response.Write("Error : " + ex.Message);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosTareaFlujo_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();//Objeto json
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_flujo = dataJson.id_flujo;
+                string _rut_empresa = dataJson.rut_empresa;
+
+                retorno = tareaNE.TraerTodosTareaFlujo(_id_flujo,_rut_empresa);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.tareas = retorno.Tables[0];
+                }
+                else
+                {
+                    data.tareas = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
             }
 
         }

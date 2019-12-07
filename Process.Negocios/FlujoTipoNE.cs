@@ -66,5 +66,22 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerTodosFlujosTipoEquipo(string _rut_empresa, int _id_equipo)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = flujoTipoDA.TraerTodosFlujosTipoEquipo(_rut_empresa, _id_equipo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

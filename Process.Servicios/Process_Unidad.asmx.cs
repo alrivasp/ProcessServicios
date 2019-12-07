@@ -245,13 +245,13 @@ namespace Process.Servicios
 
                 retorno = unidadNE.TraerUnidadPorEmpresaSinEntidad(_rut_empresa);
 
-                if(retorno.Tables.Count > 0)
+                if(retorno != null && retorno.Tables.Count > 0)
                 {
                     data.unidades = retorno.Tables[0];
                 }
                 else
                 {
-                    data.unidades = null;
+                    data.unidades = retorno;
                 }
 
                 datosRespuesta.datos = data;

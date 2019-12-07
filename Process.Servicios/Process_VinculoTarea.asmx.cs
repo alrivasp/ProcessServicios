@@ -102,6 +102,181 @@ namespace Process.Servicios
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void EliminarTodosVinculosTarea_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_tarea = dataJson.ID_TAREA;
+
+                retorno = vinculoTareaNE.EliminarTodosVinculosTarea(_id_tarea);
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void EliminarVinculoTarea_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+            try
+            {
+                CadenaConexion();
+                int retorno = 0;
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_tarea_hijo = dataJson.ID_TAREA_HIJO;
+                int _id_tarea_padre = dataJson.ID_TAREA_PADRE;
+
+                retorno = vinculoTareaNE.EliminarVinculoTarea(_id_tarea_padre, _id_tarea_hijo);
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosVinculosTarea_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();//Objeto json
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_tarea = dataJson.id_tarea;
+
+                retorno = vinculoTareaNE.TraerTodosVinculosTarea(_id_tarea);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.vinculos = retorno.Tables[0];
+                }
+                else
+                {
+                    data.vinculos = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosVinculosTareaHijo_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+            dynamic data = new ExpandoObject();
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int _id_tarea = dataJson.id_tarea;
+
+                retorno = vinculoTareaNE.TraerTodosVinculosTareaHijo(_id_tarea);
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.vinculos = retorno.Tables[0];
+                }
+                else
+                {
+                    data.vinculos = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+        }
+
         /// <summary>
         /// CONEXION 
         /// </summary>

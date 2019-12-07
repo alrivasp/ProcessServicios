@@ -97,5 +97,22 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerUsuariosEquipo(int _id_equipo)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = usuarioEquipoDA.TraerUsuariosEquipo(_id_equipo);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

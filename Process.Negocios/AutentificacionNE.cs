@@ -86,5 +86,41 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerEquiposUsuario(string _rut_usuario, string _rut_empresa)
+        {
+
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = autentificacionDA.TraerEquiposUsuario(_rut_usuario, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerFechaActual(string _rut_empresa)
+        {
+
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = autentificacionDA.TraerFechaActual(_rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

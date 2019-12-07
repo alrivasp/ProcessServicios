@@ -34,13 +34,13 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void notificacionAsignacion_Web(string json)
         {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+            int retorno = 0;
+
             try
             {
                 CadenaConexion();
-                int retorno = 0;
-
-                dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
@@ -65,10 +65,14 @@ namespace Process.Servicios
                 Context.Response.Write(JSONString);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                datosRespuesta.datos = -1;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
         }
 
@@ -76,13 +80,13 @@ namespace Process.Servicios
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void notificacionRechazo_Web(string json)
         {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+            int retorno = 0;
+
             try
             {
                 CadenaConexion();
-                int retorno = 0;
-
-                dynamic dataJson = new ExpandoObject();
-                dynamic datosRespuesta = new ExpandoObject();
 
                 dataJson = JsonConvert.DeserializeObject<dynamic>(json);
 
@@ -108,10 +112,14 @@ namespace Process.Servicios
                 Context.Response.Write(JSONString);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                datosRespuesta.datos = -1;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
         }
 

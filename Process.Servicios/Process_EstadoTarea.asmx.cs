@@ -31,16 +31,14 @@ namespace Process.Servicios
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void TraerTodosEstadoTarea_Web()
+        public void TraerTodosEstadoTarea_Web(string json)
         {
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
             try
             {
                 CadenaConexion();
                 DataSet retorno = new DataSet();
-
-                dynamic dataJson = new ExpandoObject();//Objeto json
-                dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
-                dynamic data = new ExpandoObject();
 
                 retorno = estadoTareaNE.TraerTodosEstadoTarea();//se envian variables
 
@@ -56,8 +54,14 @@ namespace Process.Servicios
             }
             catch (Exception ex)
             {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("Error : " + ex.Message);
+                Context.Response.Write(JSONString);
             }
 
         }

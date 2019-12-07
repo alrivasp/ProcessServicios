@@ -117,13 +117,65 @@ namespace Process.Servicios
 
                 retornoFlujosTipo = flujoTipoNE.TraerTodosFlujosTipo(_rut_empresa);//se envian variables
 
-                if (retornoFlujosTipo.Tables.Count > 0)
+                if (retornoFlujosTipo != null && retornoFlujosTipo.Tables.Count > 0)
                 {
                     data.flujosTipos = retornoFlujosTipo.Tables[0];
                 }
                 else
                 {
-                    data.flujosTipos = null;
+                    data.flujosTipos = retornoFlujosTipo;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosFlujosTipoEquipo_Web(string json)
+        {
+            dynamic datosRespuesta = new ExpandoObject();
+            try
+            {
+                CadenaConexion();
+                DataSet retornoFlujosTipo = new DataSet();
+
+                dynamic dataJson = new ExpandoObject();
+
+                dynamic data = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
+
+                string _rut_empresa = dataJson.rut_empresa;
+                int _id_equipo = dataJson.id_equipo;
+
+                retornoFlujosTipo = flujoTipoNE.TraerTodosFlujosTipoEquipo(_rut_empresa, _id_equipo);//se envian variables
+
+                if (retornoFlujosTipo != null && retornoFlujosTipo.Tables.Count > 0)
+                {
+                    data.flujosTipos = retornoFlujosTipo.Tables[0];
+                }
+                else
+                {
+                    data.flujosTipos = retornoFlujosTipo;
                 }
 
                 datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta

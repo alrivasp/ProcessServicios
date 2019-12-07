@@ -18,7 +18,7 @@ namespace Process.Negocios
 
             try
             {
-                int retorno = 0;
+                int retorno = 1;
 
                 //Asunto Correo
                 string _asunto_correo = "ATENCION Asignacion de Tarea, se le acaba de asignar una Tarea en Plataforma PROCESS";
@@ -72,7 +72,7 @@ namespace Process.Negocios
 
             try
             {
-                int retorno = 0;
+                int retorno = 1;
 
                 //Asunto Correo
                 string _asunto_correo = "ATENCION Rechazo de Tarea, se acaba de Rechazar una tarea asignada por Usted en Plataforma PROCESS";

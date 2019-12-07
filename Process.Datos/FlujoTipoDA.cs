@@ -147,5 +147,46 @@ namespace Process.Datos
             return datos;
         }
 
+        public DataSet TraerTodosFlujosTipoEquipo(string _rut_empresa, int _id_equipo)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "FLUJO_TIPO_TRAER_TODOS_EQUIPO";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
+                cmd.Parameters.Add("V_ID_EQUIPO", OracleDbType.Int32).Value = _id_equipo;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_FLUJO_TIPOS", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
+
     }
 }

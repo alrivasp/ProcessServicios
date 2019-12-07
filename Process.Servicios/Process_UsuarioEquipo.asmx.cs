@@ -7,6 +7,9 @@ using Oracle.ManagedDataAccess.Client;
 using Process.Modelos;
 using Process.Negocios;
 using System.Data;
+using System.Web.Script.Services;
+using System.Dynamic;
+using Newtonsoft.Json;
 
 namespace Process.Servicios
 {
@@ -127,7 +130,56 @@ namespace Process.Servicios
         ////Web Metodos para APP WEB
         //////////////////////////////////////
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerUsuariosEquipo_Web(string json)
+        {
+            dynamic datosRespuesta = new ExpandoObject();
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
 
+                dynamic dataJson = new ExpandoObject();
+
+                dynamic data = new ExpandoObject();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);//Se lee el json
+
+                int _id_equipo = dataJson.id_equipo;
+
+                retorno = usuarioEquipoNE.TraerUsuariosEquipo(_id_equipo);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.usuarios = retorno.Tables[0];
+                }
+                else
+                {
+                    data.usuarios = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
 
         /// <summary>
         /// CONEXION 

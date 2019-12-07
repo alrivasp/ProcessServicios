@@ -130,6 +130,47 @@ namespace Process.Datos
             return datos;
         }
 
+        public DataSet TraerEquiposUsuario(string _rut_usuario, string _rut_empresa)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "EQUIPO_TRAER_EQUIPO_USUARIO";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_RUT_USUARIO", OracleDbType.NVarchar2).Value = _rut_usuario;
+                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_EQUIPOS", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
+
         public DataSet TraerEmpresasUsuario(string _rut_usuario)
         {
             OracleCommand cmd = null;
@@ -146,6 +187,46 @@ namespace Process.Datos
                 cmd.Parameters.Add("V_RUT_USUARIO", OracleDbType.NVarchar2).Value = _rut_usuario;
 
                 OracleParameter retorno = cmd.Parameters.Add("C_EMPRESAS", OracleDbType.RefCursor);
+                retorno.Direction = ParameterDirection.Output;
+
+                cmd.Connection.Open();
+
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dt.Load(dr);
+                    datos.Tables.Add(dt);
+                }
+
+            }
+            catch (Exception pe)
+            {
+                Console.Write(pe.Message);
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+            return datos;
+        }
+
+        public DataSet TraerFechaActual(string _rut_empresa)
+        {
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+            DataSet datos = new DataSet();
+            DataTable dt = new DataTable();
+            try
+            {
+                string procedure = "SISTEMA_TRAER_FECHA_ACTUAL";
+                OracleConnection cnx = Global.CadenaConexionGlobal;
+                cmd = new OracleCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("V_RUT_EMPRESA", OracleDbType.NVarchar2).Value = _rut_empresa;
+
+                OracleParameter retorno = cmd.Parameters.Add("C_RESULTADO", OracleDbType.RefCursor);
                 retorno.Direction = ParameterDirection.Output;
 
                 cmd.Connection.Open();
