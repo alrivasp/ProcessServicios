@@ -45,7 +45,14 @@ namespace Process.Servicios
 
                 retorno = tipoProblemaNE.TraerTodosTipoProblema();//se envian variables
 
-                data.tipoProblema = retorno.Tables[0];
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.tipoProblema = retorno.Tables[0];
+                }
+                else
+                {
+                    data.tipoProblema = retorno;
+                }
 
                 datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
 

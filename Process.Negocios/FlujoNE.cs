@@ -118,6 +118,23 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerEstadisticasFlujo(string _rut_usuario, string _rut_empresa)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = flujoDA.TraerEstadisticasFlujo(_rut_usuario, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
 
     }
 }

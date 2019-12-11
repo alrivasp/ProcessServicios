@@ -83,5 +83,89 @@ namespace Process.Negocios
             }
 
         }
+
+        public DataSet TraerTodosTareaUsuario(string _rut_usuario, string _rut_empresa)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = tareaDA.TraerTodosTareaUsuario(_rut_usuario, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerTodosTareaSubtareas(int id_tarea, string _rut_empresa)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = tareaDA.TraerTodosTareaSubtareas(id_tarea, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+        public DataSet ValidaSubordinacion(int id_tarea)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = tareaDA.ValidaSubordinacion(id_tarea);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerEstadisticasTarea(string _rut_usuario, string _rut_empresa)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = tareaDA.TraerEstadisticasTarea(_rut_usuario, _rut_empresa);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
+        public DataSet TraerEstadisticasTareaMes(string _rut_usuario, string _rut_empresa, int mes)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = tareaDA.TraerEstadisticasTareaMes(_rut_usuario, _rut_empresa, mes);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
     }
 }

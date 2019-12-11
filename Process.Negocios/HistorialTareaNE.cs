@@ -66,5 +66,22 @@ namespace Process.Negocios
 
         }
 
+        public DataSet TraerHistorialTarea(int id_tarea)
+        {
+            try
+            {
+                DataSet retorno = new DataSet();
+                retorno = historialTareaDA.TraerHistorialTarea(id_tarea);
+                return retorno;
+
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+
+        }
+
     }
 }

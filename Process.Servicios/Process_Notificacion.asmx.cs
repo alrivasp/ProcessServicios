@@ -96,13 +96,56 @@ namespace Process.Servicios
                 string _flujo_nombre = dataJson.FLUJO_NOMBRE;
                 string _nombre_funcionario_destino = dataJson.NOMBRE_FUNCIONARIO_DESTINO;
                 string _nombre_funcionario_origen = dataJson.NOMBRE_FUNCIONARIO_ORIGEN;
-                string _nombre_equipo = dataJson.NOMBRE_EQUIPO;
-                string _nombre_unidad = dataJson.NOMBRE_UNIDAD;
                 string _nombre_empresa = dataJson.NOMBRE_EMPRESA;
                 string _motivo = dataJson.MOTIVO;
 
 
-                retorno = notificacionNE.notificacionRechazo(_correo_destino, _id_tarea, _nombre_tarea, _flujo_nombre, _nombre_funcionario_destino, _nombre_funcionario_origen, _nombre_equipo, _nombre_unidad, _nombre_empresa, _motivo);
+                retorno = notificacionNE.notificacionRechazo(_correo_destino, _id_tarea, _nombre_tarea, _flujo_nombre, _nombre_funcionario_destino, _nombre_funcionario_origen, _nombre_empresa, _motivo);
+
+                datosRespuesta.datos = retorno;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+
+            }
+            catch (Exception)
+            {
+                datosRespuesta.datos = -1;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void notificacionProblema_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();
+            dynamic datosRespuesta = new ExpandoObject();
+            int retorno = 0;
+
+            try
+            {
+                CadenaConexion();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                string _correo_destino = dataJson.CORREO_DESTINO;
+                int _id_tarea = dataJson.ID_TAREA;
+                string _nombre_tarea = dataJson.NOMBRE_TAREA;
+                string _flujo_nombre = dataJson.FLUJO_NOMBRE;
+                string _nombre_funcionario_destino = dataJson.NOMBRE_FUNCIONARIO_DESTINO;
+                string _nombre_funcionario_origen = dataJson.NOMBRE_FUNCIONARIO_ORIGEN;
+                string _nombre_empresa = dataJson.NOMBRE_EMPRESA;
+                string _descripcion = dataJson.DESCRIPCION;
+
+
+                retorno = notificacionNE.notificacionProblema(_correo_destino, _id_tarea, _nombre_tarea, _flujo_nombre, _nombre_funcionario_destino, _nombre_funcionario_origen, _nombre_empresa, _descripcion);
 
                 datosRespuesta.datos = retorno;
 

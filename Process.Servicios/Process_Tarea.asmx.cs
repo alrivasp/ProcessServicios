@@ -211,6 +211,261 @@ namespace Process.Servicios
 
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosTareaUsuario_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();//Objeto json
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                string _rut_usuario = dataJson.rut_usuario;
+                string _rut_empresa = dataJson.rut_empresa;
+
+                retorno = tareaNE.TraerTodosTareaUsuario(_rut_usuario, _rut_empresa);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.tareas = retorno.Tables[0];
+                }
+                else
+                {
+                    data.tareas = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerTodosTareaSubtareas_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();//Objeto json
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int id_tarea = dataJson.id_tarea;
+                string _rut_empresa = dataJson.rut_empresa;
+
+                retorno = tareaNE.TraerTodosTareaSubtareas(id_tarea, _rut_empresa);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.tareas = retorno.Tables[0];
+                }
+                else
+                {
+                    data.tareas = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void ValidaSubordinacion_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();//Objeto json
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int id_tarea = dataJson.id_tarea;
+
+                retorno = tareaNE.ValidaSubordinacion(id_tarea);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.tareas = retorno.Tables[0];
+                }
+                else
+                {
+                    data.tareas = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerEstadisticasTarea_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();//Objeto json
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                string _rut_usuario = dataJson.rut_usuario;
+                string _rut_empresa = dataJson.rut_empresa;
+
+                retorno = tareaNE.TraerEstadisticasTarea(_rut_usuario, _rut_empresa);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.estadisticas = retorno.Tables[0];
+                }
+                else
+                {
+                    data.estadisticas = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerEstadisticasTareaMes_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();//Objeto json
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                string _rut_usuario = dataJson.rut_usuario;
+                string _rut_empresa = dataJson.rut_empresa;
+                int mes = dataJson.mes;
+
+                retorno = tareaNE.TraerEstadisticasTareaMes(_rut_usuario, _rut_empresa, mes);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.estadisticas = retorno.Tables[0];
+                }
+                else
+                {
+                    data.estadisticas = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
+
         /// <summary>
         /// CONEXION 
         /// </summary>

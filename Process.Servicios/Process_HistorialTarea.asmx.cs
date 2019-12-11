@@ -142,6 +142,56 @@ namespace Process.Servicios
 
         }
 
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void TraerHistorialTarea_Web(string json)
+        {
+            dynamic dataJson = new ExpandoObject();//Objeto json
+            dynamic datosRespuesta = new ExpandoObject();//Objeto respuesta
+            dynamic data = new ExpandoObject();
+
+            try
+            {
+                CadenaConexion();
+                DataSet retorno = new DataSet();
+
+                dataJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                int id_tarea = dataJson.id_tarea;
+
+                retorno = historialTareaNE.TraerHistorialTarea(id_tarea);//se envian variables
+
+                if (retorno != null && retorno.Tables.Count > 0)
+                {
+                    data.historialtarea = retorno.Tables[0];
+                }
+                else
+                {
+                    data.historialtarea = retorno;
+                }
+
+                datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);//Objeto respuesta se pasa a json
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);//se responde método
+
+            }
+            catch (Exception ex)
+            {
+                dynamic dataError = new ExpandoObject();
+                dataError.error = ex.Message;
+                datosRespuesta.datos = dataError;
+
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(datosRespuesta);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JSONString);
+            }
+
+        }
         /// <summary>
         /// CONEXION 
         /// </summary>
