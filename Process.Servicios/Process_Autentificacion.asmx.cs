@@ -132,7 +132,15 @@ namespace Process.Servicios
 
                 data.sesion = retornoSesion.Tables[0];
                 data.permisos = retornoPermisos.Tables[0];
-                data.equipos = retornoEquipos.Tables[0];
+                
+                if (retornoEquipos != null && retornoEquipos.Tables.Count > 0)
+                {
+                    data.equipos = retornoEquipos.Tables[0];
+                }
+                else
+                {
+                    data.equipos = retornoEquipos;
+                }
 
                 datosRespuesta.datos = data; //se pasa respuesta dataset a objeto respuesta
 
